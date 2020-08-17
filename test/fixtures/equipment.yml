@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sport: MyString
+  equipment_type: MyString
+  eq_name: MyString
+  size: MyString
+  purchase_price: 1
+  rental_price: 1
+  stock: 1
+
+two:
+  sport: MyString
+  equipment_type: MyString
+  eq_name: MyString
+  size: MyString
+  purchase_price: 1
+  rental_price: 1
+  stock: 1
