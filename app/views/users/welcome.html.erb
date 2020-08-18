@@ -1,1 +1,22 @@
-<p> Welcome, <%= current_user.name %> </p>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+body {
+  background-image: url('https://images.unsplash.com/photo-1486728297118-82a07bc48a28?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2001&q=80');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover
+}
+
+</style>
+<body>
+<div class=" w3-animate-opacity w3-text-black">
+  <div class="w3-display-topleft w3-padding-large w3-xxlarge">
+    <%=link_to "Powder Moutain","/users" %>
+  </div>
+  <div class="w3-display-middle" >
+    <h1 class="w3-jumbo w3-animate-top w3-center"> Welcome </h1>
+    <hr>
+  </div>
+</div>
+
+</body>
