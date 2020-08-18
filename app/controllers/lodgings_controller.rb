@@ -1,8 +1,11 @@
 class LodgingsController < ApplicationController
   before_action :get_lodging, only: [:show, :edit, :update, :destroy]
+  before_action :log_check, :admin_check, only: [:new, :edit, :update, :destroy]
   
   def index
     @lodgings = Lodging.all
+    @camps = Lodging.av_camp
+    @cabins = Lodging.av_cabin
   end
 
   def new
@@ -27,6 +30,7 @@ class LodgingsController < ApplicationController
 
   def destroy
     @lodging.destroy
+    redirect_to lodgings_path
   end
 
   private
@@ -36,6 +40,6 @@ class LodgingsController < ApplicationController
   end
 
   def lodging_params
-    params.require(:lodging).permit(:lodge_type, :number, :price)
+    params.require(:lodging).permit(:lodge_type, :number, :price, :description, :rented)
   end
 end

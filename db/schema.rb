@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_185035) do
+ActiveRecord::Schema.define(version: 2020_08_18_210823) do
 
   create_table "equipment", force: :cascade do |t|
     t.string "sport"
@@ -37,8 +37,10 @@ ActiveRecord::Schema.define(version: 2020_08_17_185035) do
     t.string "lodge_type"
     t.integer "number"
     t.integer "price"
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "rented", default: false, null: false
   end
 
   create_table "reservations", force: :cascade do |t|
