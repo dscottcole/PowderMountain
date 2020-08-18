@@ -44,7 +44,7 @@ class UsersController < ApplicationController
      @user = User.find_by(username: login_params[:username])
 
     if @user && @user.authenticate(login_params[:password])
-      session[:user_id] = @current_user.id
+      session[:user_id] = @user.id
       redirect_to lodgings_path
     else
       flash[:error] = "Credentials are not valid."
