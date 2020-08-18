@@ -15,5 +15,7 @@
     <% if current_user.admin? %>
     <%= button_to "Destroy This User", user_path, :method => "delete" %>
     <% end %>
+    <br>
+    <%= button_to "Home", home_path, :method => "get" %>
 
 

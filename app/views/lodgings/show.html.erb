@@ -1,2 +1,10 @@
-<h1>Lodgings#show</h1>
-<p>Find me in app/views/lodgings/show.html.erb</p>
+<h1> <%= "#{@lodging.lodge_type} number #{@lodging.number}" %> </h1>
+<h4> Description: <%= @lodging.description %> </h4>
+<h4> Rented? <%= @lodging.rented %> </h4>
+
+<% if current_user.admin? %>
+<%= button_to "Edit This Lodge", edit_lodging_path, :method => "get" %>
+<%= button_to "Destroy This Lodge", lodging_path, :method => "delete" %>
+<% end %>
+<br>
+<%= button_to "Home", home_path, :method => "get" %>

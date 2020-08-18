@@ -1,6 +1,6 @@
 
 <% if current_user.nil? %>
-<p> Welcome, Guest! </p>
+<h3> Welcome, Guest! </h3>
 
 <%= button_to "Log In", login_path, :method => "get" %>
 
@@ -10,13 +10,24 @@
 
 <% else %>
 
-<p> Welcome, <%= current_user.name %> </p>
+<h3> Welcome, <%= current_user.name %> </h3>
 
 <% if flash[:error] %>
    <p style="color:red">  <%= flash[:error] %> </p>
 <% end %>
 
+<%= button_to "View Available Lodging", lodgings_path, :method => "get" %>
+<br>
 <%= button_to "View My Profile", user_path(current_user.id), :method => "get" %>
 <%= button_to "Log Out", logout_path, :method => "get" %>
+
+<br>
+<% if current_user.admin? %>
+<h3> Admin Capabilities </h3>
+<%= button_to "User Index", users_path, :method => "get" %>
+<%= button_to "Create Lodging", new_lodging_path, :method => "get" %>
+
+<% end %>
+
 
 <% end %>

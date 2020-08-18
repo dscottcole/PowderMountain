@@ -1,2 +1,30 @@
-<h1>Lodgings#new</h1>
-<p>Find me in app/views/lodgings/new.html.erb</p>
+<h1> Powder Mountain Lodge Creation Page </h1>
+
+<% if flash[:error] %>
+    <% flash[:error].each do |k,v| %>
+   <p style="color:red"> <%= "#{k}: #{v}." %> </p>
+    <% end %>
+<% end %>
+
+
+<%= form_for @lodging do |f| %>
+    <%= f.label :lodge_type, "Lodging Type:" %>
+    <%= f.collection_select :lodge_type, ["Camp", "Cabin"] , :to_s, :to_s, include_blank: false %> <br>
+    <br>
+    <br>
+    <%= f.label :number, "Lodging Number:" %>
+    <%= f.text_field :number %>
+    <br>
+    <br>
+    <%= f.label :price, "Price per night:" %>
+    <%= f.text_field :price %>
+    <br>
+    <br>
+    <%= f.label :description, "Description:" %>
+    <%= f.text_area:description %>
+    <br>
+    <br>
+    <%= submit_tag("Create Lodging") %>
+  <% end %>
+  <br>
+  <%= button_to "Home", home_path, :method => "get" %>

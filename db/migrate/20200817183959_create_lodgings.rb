@@ -4,6 +4,7 @@ class CreateLodgings < ActiveRecord::Migration[6.0]
       t.string :lodge_type
       t.integer :number
       t.integer :price
+      t.text :description
 
       t.timestamps
     end
