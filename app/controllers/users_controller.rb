@@ -26,11 +26,22 @@ class UsersController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
-    @user.update(user_params)
-    redirect_to user_path(@user)
+
+    byebug
+    @user.attributes = {:name => params[:user][:name], :age => params[:user][:age], :email => params[:user][:email], :username => params[:user][:username],  :password => params[:user][:password], :password_confirmation => params[:user][:password_confirmation]}
+
+    if @user.valid?
+      @user.save
+      redirect_to user_path(@user)
+      byebug
+    else
+      flash[:error] = @user.errors.messages
+      redirect_to edit_user_path(@user)
+    end
   end
 
   def destroy
