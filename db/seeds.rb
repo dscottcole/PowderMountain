@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-dan = User.create(name: "Daniel Cole", age: 28, email:"dan@gmail.com", username: "dan", password: "daddy")
-ben = User.create(name: "Ben Ebomwonyi", age: 22, email:"ben@gmail.com", username: "ben", password: "papi")
+dan = User.create(name: "Daniel Cole", age: 28, email:"dan@gmail.com", username: "dan", password: "daniel", password_confirmation: "daniel")
+ben = User.create(name: "Ben Ebomwonyi", age: 22, email:"ben@gmail.com", username: "ben", password: "benjamin", password_confirmation: "benjamin")
 
 camp1 = Lodging.create(lodge_type: "Camp", number: 1 ,price: 50)
 cabin1 = Lodging.create(lodge_type: "Cabin", number: 1 ,price: 150)

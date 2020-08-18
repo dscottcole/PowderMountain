@@ -4,5 +4,10 @@ resources :lift_passes
 resources :lodgings
 resources :equipments
 resources :users
+
+get 'login', to: "users#login"
+post 'login', to: "users#verify"
+get 'logout', to: "users#logout"
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

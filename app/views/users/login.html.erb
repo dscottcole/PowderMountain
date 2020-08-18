@@ -1,0 +1,14 @@
+<h1> Powder Mountain Login Page </h1>
+
+<% if flash[:error] %>
+   <p style="color:red">  <%= flash[:error] %> </p>
+<% end %>
+
+
+<%= form_with(url: "/login", method: "post") do |f| %>
+    <%= f.label :username %>
+    <%= f.text_field "login[username]" %> <br>
+    <%= f.label :password %>
+    <%= f.password_field "login[password]" %> <br>
+    <%= submit_tag("Log In") %>
+  <% end %>

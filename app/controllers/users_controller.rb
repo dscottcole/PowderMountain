@@ -11,8 +11,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    redirect_to user_path(@user)
+    @user = User.new(user_params)
+
+    if @user.valid?
+      @user.save  
+      redirect_to user_path(@user)
+    else
+      flash[:error] = @user.errors.messages
+      redirect_to new_user_path
+    end
   end
 
   def show
@@ -30,6 +37,26 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  def login
+  end
+
+  def verify
+     @user = User.find_by(username: login_params[:username])
+
+    if @user && @user.authenticate(login_params[:password])
+      session[:user_id] = @current_user.id
+      redirect_to lodgings_path
+    else
+      flash[:error] = "Credentials are not valid."
+      redirect_to login_path
+    end
+  end
+
+  def logout
+    session[:user_id] = nil
+    redirect_to login_path
+  end
+
   private
 
   def get_user
@@ -37,6 +64,12 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :age, :email, :username, :password)
+    params.require(:user).permit(:name, :age, :email, :username, :password, :password_confirmation)
   end
+
+  def login_params
+    params.require(:login).permit(:username, :password)
+  end
+    
+  
 end
