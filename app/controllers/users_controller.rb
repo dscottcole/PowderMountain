@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
     if @user && @user.authenticate(login_params[:password])
       session[:user_id] = @user.id
-      redirect_to lodgings_path
+      redirect_to welcome_path
     else
       flash[:error] = "Credentials are not valid."
       redirect_to login_path
