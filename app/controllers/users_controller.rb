@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
     if @user.valid?
       @user.save  
-      redirect_to user_path(@user)
+      redirect_to login_path
     else
       flash[:error] = @user.errors.messages
       redirect_to new_user_path
