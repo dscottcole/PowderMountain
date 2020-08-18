@@ -8,7 +8,8 @@ resources :users
 get 'login', to: "users#login"
 post 'login', to: "users#verify"
 get 'logout', to: "users#logout"
-get 'welcome', to: "users#welcome"
+get 'home', to: "users#home"
+get '/', to: "users#root"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,22 @@
+
+<% if current_user.nil? %>
+<p> Welcome, Guest! </p>
+
+<%= button_to "Log In", login_path, :method => "get" %>
+
+<% if flash[:error] %>
+   <p style="color:red">  <%= flash[:error] %> </p>
+<% end %>
+
+<% else %>
+
+<p> Welcome, <%= current_user.name %> </p>
+
+<% if flash[:error] %>
+   <p style="color:red">  <%= flash[:error] %> </p>
+<% end %>
+
+<%= button_to "View My Profile", user_path(current_user.id), :method => "get" %>
+<%= button_to "Log Out", logout_path, :method => "get" %>
+
+<% end %>

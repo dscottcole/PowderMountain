@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
-  before_action :get_user, only: [:show, :edit, :update, :destroy]
-  
+  before_action :get_user, :log_check, only: [:show, :edit, :update, :destroy]
+  before_action :log_check, :admin_check, only: [:destroy, :index]
+  before_action :nil_check, only: :new
+    
   def index
     @users = User.all
   end
@@ -14,7 +16,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.valid?
-      @user.save  
+      @user.save
+      flash[:notice] = "Successfully created account!"
       redirect_to login_path
     else
       flash[:error] = @user.errors.messages
@@ -23,21 +26,20 @@ class UsersController < ApplicationController
   end
 
   def show
+
   end
 
   def edit
-
+    
   end
 
   def update
-
-    byebug
-    @user.attributes = {:name => params[:user][:name], :age => params[:user][:age], :email => params[:user][:email], :username => params[:user][:username],  :password => params[:user][:password], :password_confirmation => params[:user][:password_confirmation]}
+    @user.attributes = {:name => params[:user][:name], :age => params[:user][:age], :email => params[:user][:email], :password => params[:user][:password], :password_confirmation => params[:user][:password_confirmation]}
 
     if @user.valid?
       @user.save
+      flash[:notice] = "Successfully updated account!"
       redirect_to user_path(@user)
-      byebug
     else
       flash[:error] = @user.errors.messages
       redirect_to edit_user_path(@user)
@@ -46,6 +48,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
+    redirect_to home_path
   end
 
   def login
@@ -56,7 +59,7 @@ class UsersController < ApplicationController
 
     if @user && @user.authenticate(login_params[:password])
       session[:user_id] = @user.id
-      redirect_to welcome_path
+      redirect_to home_path
     else
       flash[:error] = "Credentials are not valid."
       redirect_to login_path
@@ -66,6 +69,13 @@ class UsersController < ApplicationController
   def logout
     session[:user_id] = nil
     redirect_to login_path
+  end
+
+  def home
+  end
+
+  def root
+      redirect_to home_path
   end
 
   private
@@ -81,6 +91,5 @@ class UsersController < ApplicationController
   def login_params
     params.require(:login).permit(:username, :password)
   end
-    
-  
+ 
 end

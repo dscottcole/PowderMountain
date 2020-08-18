@@ -4,6 +4,10 @@
    <p style="color:red">  <%= flash[:error] %> </p>
 <% end %>
 
+<% if flash[:notice] %>
+    <p style="color:blue"> <%= flash[:notice] %> </p>
+<% end %>
+
 
 <%= form_with(url: "/login", method: "post") do |f| %>
     <%= f.label :username %>
@@ -12,3 +16,6 @@
     <%= f.password_field "login[password]" %> <br>
     <%= submit_tag("Log In") %>
   <% end %>
+
+   <p> No existing account? </p>
+  <%= button_to "Create New Account", new_user_path, :method => "get" %>

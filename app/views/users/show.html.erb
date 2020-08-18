@@ -1,8 +1,19 @@
 <h1> <%= @user.name %> </h1>
 
+<% if flash[:notice] %>
+    <p style="color:blue"> <%= flash[:notice] %> </p>
+<% end %>
+
     <p> Age: <%= @user.age %> </p>
     <p> Email: <%= @user.email %> </p>
     <p> Username: <%= @user.username %> </p>
     <p> Member since: <%= @user.created_at %> </p>
 
+    <% if current_user.id == @user.id || current_user.admin? %>
     <%= button_to "Edit User Info", edit_user_path(@user.id), :method => "get" %>
+    <% end %>
+    <% if current_user.admin? %>
+    <%= button_to "Destroy This User", user_path, :method => "delete" %>
+    <% end %>
+
+
