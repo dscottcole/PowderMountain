@@ -1,8 +1,25 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+body {
+   background-image: url('https://images.unsplash.com/photo-1486728297118-82a07bc48a28?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2001&q=80');
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover
+}
+
+</style>
 
 <% if current_user.nil? %>
-<h3> Welcome, Guest! </h3>
-
-<%= button_to "Log In", login_path, :method => "get" %>
+<div class="w3-display-topleft w3-padding-large w3-xxlarge">
+<%="Powder Moutain" %>
+</div>
+<div class="w3-display-middle w3-center w3-animate-opacity">
+   <h3 class="w3-jumbo w3-animate-top "> Welcome, Guest! </h3>
+   <hr>
+   <p><button class="w3-button w3-black w3-round-xxlarge">
+   <%=link_to "log in","/login"%>
+   </button></p>
+</div>
 
 <% if flash[:error] %>
    <p style="color:red">  <%= flash[:error] %> </p>
