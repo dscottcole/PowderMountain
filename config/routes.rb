@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+resources :gear_bags
 resources :reservations
 resources :lift_passes
 resources :lodgings

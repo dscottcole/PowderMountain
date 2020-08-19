@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_210823) do
+ActiveRecord::Schema.define(version: 2020_08_18_234732) do
 
   create_table "equipment", force: :cascade do |t|
     t.string "sport"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(version: 2020_08_18_210823) do
     t.integer "purchase_price"
     t.integer "rental_price"
     t.integer "stock"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "gear_bags", force: :cascade do |t|
+    t.text "bikegear"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -47,13 +53,13 @@ ActiveRecord::Schema.define(version: 2020_08_18_210823) do
     t.date "start_date"
     t.date "end_date"
     t.integer "user_id"
-    t.integer "equipment_id"
     t.boolean "rent_eq"
     t.integer "lodging_id"
     t.integer "lift_pass_id"
     t.integer "total_cost"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "gear_bag_id"
   end
 
   create_table "users", force: :cascade do |t|
