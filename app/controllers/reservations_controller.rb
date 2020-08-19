@@ -8,9 +8,11 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
+
   end
 
   def create
+    byeb
     @reservation = Reservation.create(reservation_params)
     redirect_to reservation_path(@reservation)
   end
@@ -18,16 +20,28 @@ class ReservationsController < ApplicationController
   def show
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
-  def update
-    @reservation.update(reservation_params)
-    redirect_to reservation_path(@reservation)
-  end
+  # def update
+  #   @reservation.update(reservation_params)
+  #   redirect_to reservation_path(@reservation)
+  # end
 
   def destroy
     @reservation.destroy
+  end
+
+  def res_liftpass
+    byebug
+    render :new_lift_pass_path
+  end
+  
+  def res_gearbag
+  end
+
+  def res_lodging
+  
   end
 
   private

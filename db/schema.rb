@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 2020_08_18_234732) do
     t.string "sport"
     t.string "equipment_type"
     t.string "eq_name"
-    t.string "size"
     t.integer "purchase_price"
     t.integer "rental_price"
     t.integer "stock"
@@ -25,7 +24,11 @@ ActiveRecord::Schema.define(version: 2020_08_18_234732) do
   end
 
   create_table "gear_bags", force: :cascade do |t|
-    t.text "bikegear"
+    t.integer "bike_id"
+    t.integer "helmet_id"
+    t.integer "pads_id"
+    t.integer "gloves_id"
+    t.integer "goggles_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
