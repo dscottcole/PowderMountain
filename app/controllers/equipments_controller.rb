@@ -1,6 +1,7 @@
 class EquipmentsController < ApplicationController
   
   before_action :get_equipment, only: [:show, :edit, :update, :destroy]
+  before_action :log_check, :admin_check, only: [:index, :new, :edit, :update, :destroy]
   
   def index
     @equipments = Equipment.all

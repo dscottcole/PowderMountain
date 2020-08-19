@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :get_reservation, only: [:show, :edit, :update, :destroy]
+  before_action :log_check, :admin_check, only: [:index, :destroy]
   
   def index
     @reservations = Reservation.all

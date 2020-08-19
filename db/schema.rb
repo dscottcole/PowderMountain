@@ -31,7 +31,9 @@ ActiveRecord::Schema.define(version: 2020_08_18_234732) do
   end
 
   create_table "lift_passes", force: :cascade do |t|
-    t.string "pass_type"
+    t.string "pass_type", default: "Day"
+    t.date "start_date"
+    t.date "end_date"
     t.integer "duration"
     t.integer "price"
     t.integer "user_id"

@@ -1,6 +1,7 @@
 class LiftPassesController < ApplicationController
   before_action :get_lift_pass, only: [:show, :edit, :update, :destroy]
-  
+  before_action :log_check, :admin_check, only: [:destroy]
+
   def index
     @lift_passes = LiftPass.all
   end
