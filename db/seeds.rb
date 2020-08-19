@@ -69,6 +69,9 @@ Equipment.create(sport: "Bike", equipment_type: "Gloves", eq_name: "100% R-Core"
 
 Equipment.create(sport: "Bike", equipment_type: "Goggles", eq_name: "Smith Squad Goggs", size: "S", purchase_price: 80, rental_price: 10, stock: 63)
 
-res1 = Reservation.create(start_date: "2020-08-01", end_date: "2020-08-02", user_id: dan.id, equipment_id: eq1.id, rent_eq: false, lodging_id: camp1.id, lift_pass_id: lp1.id, total_cost: 200)
-res2 = Reservation.create(start_date: "2020-08-01", end_date: "2020-08-07", user_id: ben.id, equipment_id: eq2.id, rent_eq: false, lodging_id: cabin1.id, lift_pass_id: lp2.id, total_cost: 2275)
+gb1 = GearBag.create(bikegear: [eq1])
+gb2 = GearBag.create(bikegear: [eq2])
+
+res1 = Reservation.create(start_date: "2020-08-01", end_date: "2020-08-02", user_id: dan.id, gear_bag_id: gb1.id, rent_eq: false, lodging_id: camp1.id, lift_pass_id: lp1.id, total_cost: 200)
+res2 = Reservation.create(start_date: "2020-08-01", end_date: "2020-08-07", user_id: ben.id, gear_bag_id: gb2.id, rent_eq: false, lodging_id: cabin1.id, lift_pass_id: lp2.id, total_cost: 2275)
 

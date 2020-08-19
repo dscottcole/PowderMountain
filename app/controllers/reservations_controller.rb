@@ -36,6 +36,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:start_date, :end_date, :user_id, :equipment_id, :rent_eq, :lodging_id, :lift_pass_id)
+    params.require(:reservation).permit(:start_date, :end_date, :user_id, :rent_eq, :lodging_id, :lift_pass_id, :gear_bag_id)
   end
 end
