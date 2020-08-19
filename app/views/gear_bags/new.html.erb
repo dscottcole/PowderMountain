@@ -1,0 +1,17 @@
+<h1> Gear Bag Creation </h1>
+
+<%= form_for @gear_bag do |f| %>
+    <%= f.label "Select a bike (model - size): " %>
+    <%= f.collection_select :bike_id, Equipment.bikes, :id, :eq_name %> <br>
+    <%= f.label "Select a helmet (model - size): " %>
+    <%= f.collection_select :helmet_id, Equipment.helmets, :id, :eq_name %> <br>
+    <%= f.label "Select your pads (model - size): " %>
+    <%= f.collection_select :pads_id, Equipment.pads, :id, :eq_name %> <br>
+    <%= f.label "Select your gloves (model - size): " %>
+    <%= f.collection_select :gloves_id, Equipment.gloves, :id, :eq_name %> <br>
+    <%= f.label "Select goggles: " %>
+    <%= f.collection_select :goggles_id, Equipment.goggles, :id, :eq_name %> <br>
+    <br>
+
+<%= f.submit "Add to Gear Bag" %>
+<% end %>

@@ -1,6 +1,9 @@
 class LiftPassesController < ApplicationController
   before_action :get_lift_pass, only: [:show, :edit, :update, :destroy]
   before_action :log_check, :admin_check, only: [:destroy]
+  before_action :log_check, only: [:new]
+
+  $price = 50
 
   def index
     @lift_passes = LiftPass.all
@@ -11,7 +14,8 @@ class LiftPassesController < ApplicationController
   end
 
   def create
-    @lift_pass = LiftPass.create(lift_pass_params)
+    @lift_pass = LiftPass.create(start_date: lift_pass_params[:start_date], end_date: lift_pass_params[:end_date], duration: calculate_duration, price: $price, user_id: current_user.id )
+    byebug
     redirect_to lift_pass_path(@lift_pass)
   end
 
@@ -37,6 +41,10 @@ class LiftPassesController < ApplicationController
   end
 
   def lift_pass_params
-    params.require(:lift_pass).permit(:pass_type, :duration, :price, :user_id)
+    params.require(:lift_pass).permit(:start_date, :end_date)
+  end
+
+  def calculate_duration
+    (lift_pass_params[:end_date].to_date - lift_pass_params[:start_date].to_date).to_i
   end
 end

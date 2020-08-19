@@ -1,3 +1,3 @@
 class GearBag < ApplicationRecord
-    serialize :bikegear, Array
+    has_many :reservations
 end
