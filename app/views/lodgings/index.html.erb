@@ -4,10 +4,13 @@
 <p> Number of Campsites: <%= @camps.count %> </p>
 <p> Number of Cabins: <%= @cabins.count %> </p>
 
+
+
+
 <% if current_user.admin? %>
  <h3> Lodging Management: </h3>
     <% @lodgings.each do |l| %>
-    <%= link_to "#{l.lodge_type} number: #{l.number} Rented? #{l.rented}", lodging_path(l.id) %>
+    <%= link_to "#{l.lodging_name} Rented? #{l.rented}", lodging_path(l.id) %>
     <br>
     <% end %>
 
