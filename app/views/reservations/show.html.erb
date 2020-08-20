@@ -1,5 +1,12 @@
 <h1>Reservation # <%= @reservation.id %> </h1>
 
+<h3> Shredder's Name: </h3> 
+<%= @reservation.user.name %>
+<% if @reservation.user.age < 18 %>
+    <p style="color:red"> <%= "Under 18 shredder, must have a parent or guardian present to sign waiver!" %> 
+<% end %>
+
+
 <% if flash[:notice] %>
     <p style="color:blue"> <%= flash[:notice] %> </p>
 <% end %>
