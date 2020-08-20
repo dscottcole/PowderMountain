@@ -59,6 +59,8 @@ class UsersController < ApplicationController
 
     if @user && @user.authenticate(login_params[:password])
       session[:user_id] = @user.id
+      session[:lift_pass] = nil
+      session[:gear_bag] = nil
       redirect_to home_path
     else
       flash[:error] = "Credentials are not valid."
@@ -68,6 +70,8 @@ class UsersController < ApplicationController
 
   def logout
     session[:user_id] = nil
+    session[:lift_pass] = nil
+    session[:gear_bag] = nil
     redirect_to login_path
   end
 

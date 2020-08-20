@@ -1,4 +1,5 @@
 class Equipment < ApplicationRecord
+    has_many :gear_bags
 
     def self.bikes
         self.all.find_all {|e| e.equipment_type == "Bike" && e.stock > 0}

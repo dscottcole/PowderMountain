@@ -33,6 +33,11 @@ class LodgingsController < ApplicationController
     redirect_to lodgings_path
   end
 
+  def rent_lodging
+    @lodging = Lodging.new
+  end
+
+
   private
 
   def get_lodging
@@ -40,6 +45,6 @@ class LodgingsController < ApplicationController
   end
 
   def lodging_params
-    params.require(:lodging).permit(:lodge_type, :number, :price, :description, :rented)
+    params.require(:lodging).permit(:lodging_name, :price, :description, :rented)
   end
 end

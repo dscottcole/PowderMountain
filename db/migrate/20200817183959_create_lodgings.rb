@@ -1,8 +1,7 @@
 class CreateLodgings < ActiveRecord::Migration[6.0]
   def change
     create_table :lodgings do |t|
-      t.string :lodge_type
-      t.integer :number
+      t.string :lodging_name
       t.integer :price
       t.text :description
 

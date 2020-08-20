@@ -3,7 +3,7 @@ class LiftPassesController < ApplicationController
   before_action :log_check, :admin_check, only: [:destroy]
   before_action :log_check, only: [:new]
 
-  $price = 50
+
 
   def index
     @lift_passes = LiftPass.all
@@ -14,9 +14,21 @@ class LiftPassesController < ApplicationController
   end
 
   def create
-    @lift_pass = LiftPass.create(start_date: lift_pass_params[:start_date], end_date: lift_pass_params[:end_date], duration: calculate_duration, price: $price, user_id: current_user.id )
-    byebug
-    redirect_to lift_pass_path(@lift_pass)
+    if params[:lift_pass][:start_date].empty? || params[:lift_pass][:end_date].empty?
+      flash[:error] = [Lift_Pass_Date_Range_Error: "Please ensure that none of the lift pass dates are empty."]
+      redirect_to new_reservation_path
+    else
+      @lift_pass = LiftPass.new(start_date: lift_pass_params[:start_date], end_date: lift_pass_params[:end_date], duration: calculate_duration, price: lift_price, user_id: current_user.id )
+      if @lift_pass.valid?
+        @lift_pass.save
+        flash[:notice] = "Your Lift Pass Reservation was created. Continue to reserve your gear & lodging if you need it. Finalize Reservation if you only want to use the lift."
+        session[:lift_pass] = @lift_pass
+        redirect_to new_reservation_path
+      else
+        flash[:error] = @lift_pass.errors.messages
+        redirect_to new_reservation_path
+      end
+    end
   end
 
   def show
@@ -47,4 +59,5 @@ class LiftPassesController < ApplicationController
   def calculate_duration
     (lift_pass_params[:end_date].to_date - lift_pass_params[:start_date].to_date).to_i
   end
+
 end
