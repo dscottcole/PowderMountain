@@ -12,7 +12,17 @@
 
 <%= render partial: "lp_new" %>
 
+<% if !session[:lift_pass].nil? %>
+    <p style="color:blue"> You have one pending lift pass. Finalize reservation to make it official! </p>
+    <%= button_to "View Pending Lift Pass", lift_pass_path(session[:lift_pass]["id"]), :method => "get" %>
+<% end %>
+
 <%= render partial: "gb_new" %>
+
+<% if !session[:gear_bag].nil? %>
+    <p style="color:blue"> You have one pending gear rental. Finalize reservation to make it official! </p>
+    <%= button_to "View Pending Gear Bag", gear_bag_path(session[:gear_bag]["id"]), :method => "get" %>
+<% end %>
 
 <h1> Finalize Your Reservation. (Lodging is optional) </h1>
 
@@ -29,5 +39,7 @@
 
     <%= submit_tag("Finalize Reservation") %>
 <% end %>
+<br>
+<%= button_to "Home", home_path, :method => "get" %>
 
 

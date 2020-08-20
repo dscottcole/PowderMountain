@@ -1,2 +1,28 @@
-<h1>Reservations#index</h1>
-<p>Find me in app/views/reservations/index.html.erb</p>
+<h1> Reservations: </h1>
+
+<% if current_user.reservations.nil? %>
+    <p> You have no reservations to display. </p>
+<% end %>
+
+<% if !current_user.reservations.nil? %>
+
+<h3> Current Reservations: </h3>
+
+
+    <% current_user.reservations.find_all {|r| r.start_date >= Date.today}.each do |rr| %>
+        <%= link_to "Reservation ##{rr.id} - Dates: #{rr.start_date} - #{rr.end_date}", reservation_path(rr.id) %> <br>
+    <% end %>
+
+
+<h3> Completed Reservations: </h3>
+
+    <% current_user.reservations.find_all {|r| r.start_date < Date.today}.each do |rr| %>
+        <%= link_to "Reservation ##{rr.id} Dates: #{rr.start_date} - #{rr.end_date}", reservation_path(rr.id) %> <br>
+    <% end %>
+
+<% end %>
+<br>
+<br>
+<%= button_to "New Reservation", new_reservation_path, :method => "get" %>
+<br>
+<%= button_to "Home", home_path, :method => "get" %>

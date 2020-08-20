@@ -1,5 +1,6 @@
 class GearBagsController < ApplicationController
   before_action :get_gear_bag, only: [:show, :edit, :update, :destroy]
+  before_action :log_check, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   
   def index
     @gear_bags = GearBag.all
@@ -20,7 +21,7 @@ class GearBagsController < ApplicationController
       flash[:error] = [Gear_Date_Range_Error: "Please ensure that none of the gear rental dates are empty."]
       redirect_to new_reservation_path
     else
-      @gear_bag = GearBag.new(bike_id: gear_bag_params[:bike_id], helmet_id: gear_bag_params[:helmet_id], pads_id: gear_bag_params[:pads_id], gloves_id: gear_bag_params[:gloves_id], goggles_id: gear_bag_params[:goggles_id], start_date: gear_bag_params[:start_date], end_date: gear_bag_params[:end_date], duration: calculate_duration)
+      @gear_bag = GearBag.new(bike_id: gear_bag_params[:bike_id], helmet_id: gear_bag_params[:helmet_id], pads_id: gear_bag_params[:pads_id], gloves_id: gear_bag_params[:gloves_id], goggles_id: gear_bag_params[:goggles_id], start_date: gear_bag_params[:start_date], end_date: gear_bag_params[:end_date], duration: calculate_duration, user_id: current_user.id)
       if @gear_bag.valid?
         @gear_bag.save
         flash[:notice] = "Your gear has been reserved. Continue to reserve lodging if you need it."
@@ -45,8 +46,9 @@ class GearBagsController < ApplicationController
   end
 
   def destroy
+    session[:gear_bag] = nil
     @gear_bag.destroy
-    redirect_to gear_bags_path
+    redirect_to home_path
   end
 
   private
@@ -56,7 +58,7 @@ class GearBagsController < ApplicationController
   end
 
   def gear_bag_params
-    params.require(:gear_bag).permit(:bike_id, :helmet_id, :pads_id, :gloves_id, :goggles_id, :start_date, :end_date)
+    params.require(:gear_bag).permit(:bike_id, :helmet_id, :pads_id, :gloves_id, :goggles_id, :start_date, :end_date, :user_id)
   end
 
   def calculate_duration

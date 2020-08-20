@@ -1,0 +1,28 @@
+<h1> Powder Mountain's Available Lodging: </h1>
+
+<h4> Campsites </h4>
+<p> Average Price of Available Camps: $<%= (Lodging.av_camp.map {|l| l.price}.sum)/(Lodging.av_camp.count) %>
+<p> Amazing view of the mountain-side, large enough for a 4-person tent.  </p>
+<p> Number of Available Campsites: <%= @camps.count %> </p>
+
+<h4> Cabins </h4>
+<p> Average Price of Available Cabins: $<%= (Lodging.av_cabin.map {|l| l.price}.sum)/(Lodging.av_cabin.count) %>
+<p> Luxurious amenities. Capacity for 4 people.  </p>
+<p> Number of Available Cabins: <%= @cabins.count %> </p>
+<br>
+
+<p> Rent lodging through a reservation. </p> 
+<p> As proof of our commitment to the sport, you can only rent lodging if you reserve a lift pass. </p>
+<%= button_to "New Reservation", new_reservation_path, :method => "get" %>
+<br>
+<%= button_to "Home", home_path, :method => "get" %>
+
+
+
+<% if current_user.admin? %>
+<h3> Lodging Management: </h3>
+    <% @lodgings.each do |l| %>
+    <%= link_to "#{l.lodging_name} Rented? #{l.rented}", lodging_path(l.id) %>
+    <br>
+    <% end %>
+<% end %>

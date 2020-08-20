@@ -1,2 +1,35 @@
-<h1>GearBag#show</h1>
-<p>Find me in app/views/gear_bag/show.html.erb</p>
+<h1>Gear Bag # <%= @gear_bag.id %> </h1>
+
+<h3> Shredder's Name: </h3> 
+<%= @gear_bag.user.name %>
+<% if @gear_bag.user.age < 18 %>
+    <p style="color:red"> <%= "Under 18 shredder, must have a parent or legal guardian present to sign waiver!" %> 
+<% end %>
+
+
+<p> Rental Start Date: <%= @gear_bag.start_date %> </p>
+<p> Rental Return Date: <%= @gear_bag.end_date %> </p>
+
+<% if !@gear_bag.reservation.nil? %>
+<p> Gear Rental Cost: $<%= Reservation.all.find_by(id: @gear_bag.reservation.id).rental_cost %> </p>
+
+
+<h4> Gear Breakdown: </h4>
+
+    <% Reservation.all.find_by(id: @gear_bag.reservation.id).rental_eq.each do |k| %>
+        <%= "#{k[1].equipment_type}: #{k[1].eq_name},   Rental Price: $#{k[1].rental_price} per day" %> <br>
+    <% end %>
+<% end %>
+
+<% if !@gear_bag.reservation.nil? %>
+<br>
+<%= button_to "View Full Reservation", reservation_path(Reservation.all.find_by(id: @gear_bag.reservation.id).id), :method => "get" %>
+<br>
+<%= button_to "Home", home_path, :method => "get" %>
+<% end %>
+
+<% if @gear_bag.reservation.nil? %>
+<p style="color:red"> This gear bag has not been secured. Finalize reservation to secure this gear bag! </p>
+<%= button_to "Return to Reservation", new_reservation_path, :method => "get" %>
+<%= button_to "Delete Pending Gear Rental", gear_bag_path, :method => "delete" %>
+<% end %>

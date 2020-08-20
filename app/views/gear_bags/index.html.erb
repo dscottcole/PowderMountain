@@ -1,2 +1,28 @@
-<h1>GearBag#index</h1>
-<p>Find me in app/views/gear_bag/index.html.erb</p>
+<h1> Gear Bags: </h1>
+
+<% if current_user.gear_bags.nil? %>
+    <p> You have no gear rentals to display. </p>
+<% end %>
+
+<% if !current_user.gear_bags.nil? %>
+
+<h3> Current Gear Bags: </h3>
+    
+    <% current_user.gear_bags.find_all {|g| g.start_date >= Date.today}.each do |gb| %>
+        <%= link_to "Gear Bag ##{gb.id} - Dates: #{gb.start_date} - #{gb.end_date}", gear_bag_path(gb.id) %> <br>
+    <% end %>
+
+<h3> Completed Gear Bags: </h3>
+
+    <% current_user.gear_bags.find_all {|g| g.start_date < Date.today}.each do |gb| %>
+        <%= link_to "Gear Bag ##{gb.id} - Dates: #{gb.start_date} - #{gb.end_date}", gear_bag_path(gb.id) %> <br>
+    <% end %>
+
+<% end %>
+<br>
+<br>
+<p> Gear Bags are created through reservations. Create a new reservation for renting gear! </p>
+<p> Important: You cannot rent gear without reserving a lift pass. </p>
+<%= button_to "New Reservation", new_reservation_path, :method => "get" %>
+<br>
+<%= button_to "Home", home_path, :method => "get" %>
