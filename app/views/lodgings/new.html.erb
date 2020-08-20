@@ -8,12 +8,8 @@
 
 
 <%= form_for @lodging do |f| %>
-    <%= f.label :lodge_type, "Lodging Type:" %>
-    <%= f.collection_select :lodge_type, ["Camp", "Cabin"] , :to_s, :to_s, include_blank: false %> <br>
-    <br>
-    <br>
-    <%= f.label :number, "Lodging Number:" %>
-    <%= f.text_field :number %>
+    <%= f.label :lodging_name, "Lodging Type + Number:" %>
+    <%= f.text_field :lodging_name %> <br>
     <br>
     <br>
     <%= f.label :price, "Price per night:" %>

@@ -5,9 +5,9 @@ class LiftPassesController < ApplicationController
 
 
 
-  def index
-    @lift_passes = LiftPass.all
-  end
+  # def index
+  #   @lift_passes = LiftPass.all
+  # end
 
   def new
     @lift_pass = LiftPass.new
