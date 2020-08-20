@@ -1,6 +1,6 @@
 class LiftPass < ApplicationRecord
     belongs_to :user
-    delegate :reservations, :to => :user
+    has_one :reservation
 
     validate :end_after_start
     validate :on_or_after_today

@@ -3,7 +3,7 @@
 <h3> Shredder's Name: </h3> 
 <%= @reservation.user.name %>
 <% if @reservation.user.age < 18 %>
-    <p style="color:red"> <%= "Under 18 shredder, must have a parent or guardian present to sign waiver!" %> 
+    <p style="color:red"> <%= "Under 18 shredder, must have a parent or legal guardian present to sign waiver!" %> 
 <% end %>
 
 
@@ -11,18 +11,16 @@
     <p style="color:blue"> <%= flash[:notice] %> </p>
 <% end %>
 
-<h3> Lift Pass # <%= @reservation.lift_pass.id %> </h3>
+<h3> <%= link_to "Lift Pass ##{@reservation.lift_pass.id}", lift_pass_path(@reservation.lift_pass.id) %> </h3>
 <p> Start Date: <%= @reservation.lift_pass.start_date %> </p>
 <p> Duration: <%= @reservation.lift_pass.duration %> days </p>
 <p> Cost: $<%= @reservation.lp_cost %> </p>
 
 <% if @reservation.gear_bag_id != nil %>
-<h3> Gear Bag # <%= @reservation.gear_bag.id %> </h3>
+<h3> <%= link_to "Gear Bag ##{@reservation.gear_bag.id}", gear_bag_path(@reservation.gear_bag.id) %> </h3>
 <p> Rental Start Date: <%= @reservation.gear_bag.start_date %> </p>
 <p> Rental Return Date: <%= @reservation.gear_bag.end_date %> </p>
 <p> Gear Rental Cost: $<%= @reservation.rental_cost %> </p>
-
-<h4> Gear Breakdown: </h4>
 
 <% @reservation.rental_eq.each do |k| %>
 <%= "#{k[1].equipment_type}: #{k[1].eq_name},   Rental Price: $#{k[1].rental_price} per day" %> <br>
@@ -30,8 +28,8 @@
 <% end %>
 
 <% if @reservation.lodging_id != nil %>
-<h3> Lodging Confirmation # <%= @reservation.id %> </h3>
-<p> Lodging Type & Number: <%= @reservation.lodging.lodging_name %> </p>
+<h3> <%= link_to "Lodging Confirmation ##{@reservation.id}", lodging_rental_path(@reservation.id) %> </h3>
+<p> Lodging Type & Number: <%= link_to @reservation.lodging.lodging_name, lodging_path(@reservation.lodging_id) %> </p>
 <p> Check-in Date: <%= @reservation.start_date %> </p>
 <p> Check-out Date:<%= @reservation.end_date %> </p>
 <p> Lodging Cost: $<%= @reservation.lodging_cost %> </p>
@@ -39,6 +37,10 @@
 
 
 <h4> Total Reservation Cost: $<%= @reservation.total_cost %> </h4>
+
+<%= button_to "Back to Reservation History", reservations_path, :method => "get" %>
+<br>
+<%= button_to "Home", home_path, :method => "get" %>
 
 
 

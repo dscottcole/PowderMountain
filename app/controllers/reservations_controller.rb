@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
-  before_action :get_reservation, only: [:show, :edit, :update, :destroy]
-  before_action :log_check, :admin_check, only: [:index, :destroy]
+  before_action :get_reservation, only: [:show, :edit, :update, :destroy, :lodging_rental]
+  before_action :log_check, only: [:index, :new, :create, :show, :edit, :update, :destoy, :lodging_rental]
   
   def index
     @reservations = Reservation.all
@@ -22,15 +22,25 @@ class ReservationsController < ApplicationController
       flash[:error] = [Lift_pass_error: "A lift pass is required to create a reservation."]
       redirect_to new_reservation_path
 
+    elsif params[:reservation][:start_date] == "" && params[:reservation][:end_date] != ""
+      flash[:error] = [Lodging_date_range_Error: "Please revise your lodging dates."]
+      redirect_to new_reservation_path
+
+    elsif params[:reservation][:start_date] != "" && params[:reservation][:end_date] == ""
+      flash[:error] = [Lodging_date_range_Error: "Please revise your lodging dates."]
+      redirect_to new_reservation_path
+
     ## Just lift_pass  
     elsif session[:lift_pass] != nil && session[:gear_bag].nil? && params[:reservation][:start_date] == "" && params[:reservation][:end_date] == ""
-      @reservation = Reservation.new(user_id: current_user.id, rent_eq: false, lift_pass_id: session[:lift_pass]["id"])
+      @reservation = Reservation.new(start_date: session[:lift_pass]["start_date"], end_date: session[:lift_pass]["end_date"], user_id: current_user.id, rent_eq: false, lift_pass_id: session[:lift_pass]["id"])
       @reservation.attributes = {:total_cost => @reservation.calculate_cost}
 
       if @reservation.valid?
         @reservation.save
         session[:lift_pass] = nil
         flash[:notice] = "Your reservation was created with just a lift pass."
+        clear_pending_lp
+        clear_pending_gb
         redirect_to reservation_path(@reservation.id)
       else
         flash[:error] = @reservation.errors.messages
@@ -47,6 +57,8 @@ class ReservationsController < ApplicationController
         session[:lift_pass] = nil
         session[:gear_bag] = nil
         flash[:notice] = "Your reservation was created with a lift pass & lodging."
+        clear_pending_lp
+        clear_pending_gb
         redirect_to reservation_path(@reservation.id)
       else
         flash[:error] = @reservation.errors.messages
@@ -64,6 +76,8 @@ class ReservationsController < ApplicationController
         session[:lift_pass] = nil
         session[:gear_bag] = nil
         flash[:notice] = "Your reservation was created with a lift pass, rental gear, and lodging."
+        clear_pending_lp
+        clear_pending_gb
         redirect_to reservation_path(@reservation.id)
       else
         flash[:error] = @reservation.errors.messages
@@ -72,7 +86,7 @@ class ReservationsController < ApplicationController
 
     #lift_pass, gearbag
     elsif session[:lift_pass] != nil && session[:gear_bag] != nil && params[:reservation][:start_date] == "" && params[:reservation][:end_date] == ""
-      @reservation = Reservation.new(user_id: current_user.id, rent_eq: true, lift_pass_id: session[:lift_pass]["id"], gear_bag_id: session[:gear_bag]["id"])
+      @reservation = Reservation.new(start_date: session[:lift_pass]["start_date"], end_date: session[:lift_pass]["end_date"],user_id: current_user.id, rent_eq: true, lift_pass_id: session[:lift_pass]["id"], gear_bag_id: session[:gear_bag]["id"])
       @reservation.attributes = {:total_cost => @reservation.calculate_cost}
       
       if @reservation.valid?
@@ -80,6 +94,8 @@ class ReservationsController < ApplicationController
         session[:lift_pass] = nil
         session[:gear_bag] = nil
         flash[:notice] = "Your reservation was created with a lift pass & rental gear."
+        clear_pending_lp
+        clear_pending_gb
         redirect_to reservation_path(@reservation.id)
       else
         flash[:error] = @reservation.errors.messages
@@ -89,6 +105,10 @@ class ReservationsController < ApplicationController
   end
 
   def show
+    if current_user.id != @reservation.user.id && current_user.admin? == false
+      flash[:error] = "You can only view your own reservations."
+      redirect_to home_path
+    end
   end
 
   # def edit
@@ -103,22 +123,13 @@ class ReservationsController < ApplicationController
     @reservation.destroy
   end
 
-  def res_liftpass
-    byebug
-    render :new_lift_pass_path
+  def lodging_rental
+    if current_user.id != @reservation.user.id && current_user.admin? == false
+      flash[:error] = "You can only view your own lodging rentals."
+      redirect_to home_path
+    end
   end
-  
-  def res_gearbag
-  end
-
-  def res_lodging
-  
-  end
-
-  def rent_lodging
-    @reservation = Reservation.new
-  end
-
+ 
   private
 
   def get_reservation

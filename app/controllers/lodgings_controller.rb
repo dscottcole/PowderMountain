@@ -1,6 +1,7 @@
 class LodgingsController < ApplicationController
   before_action :get_lodging, only: [:show, :edit, :update, :destroy]
-  before_action :log_check, :admin_check, only: [:new, :edit, :update, :destroy]
+  before_action :log_check, :admin_check, only: [:new, :create, :edit, :update, :destroy]
+  before_action :log_check, only: [:index, :show ]
   
   def index
     @lodgings = Lodging.all
@@ -33,8 +34,10 @@ class LodgingsController < ApplicationController
     redirect_to lodgings_path
   end
 
-  def rent_lodging
-    @lodging = Lodging.new
+  def available_lodging
+    @lodgings = Lodging.all
+    @camps = Lodging.av_camp
+    @cabins = Lodging.av_cabin
   end
 
 

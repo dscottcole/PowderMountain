@@ -1,13 +1,12 @@
 class LiftPassesController < ApplicationController
   before_action :get_lift_pass, only: [:show, :edit, :update, :destroy]
-  before_action :log_check, :admin_check, only: [:destroy]
-  before_action :log_check, only: [:new]
+  before_action :log_check, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
 
 
-  # def index
-  #   @lift_passes = LiftPass.all
-  # end
+  def index
+    @lift_passes = LiftPass.all
+  end
 
   def new
     @lift_pass = LiftPass.new
@@ -21,7 +20,7 @@ class LiftPassesController < ApplicationController
       @lift_pass = LiftPass.new(start_date: lift_pass_params[:start_date], end_date: lift_pass_params[:end_date], duration: calculate_duration, price: lift_price, user_id: current_user.id )
       if @lift_pass.valid?
         @lift_pass.save
-        flash[:notice] = "Your Lift Pass Reservation was created. Continue to reserve your gear & lodging if you need it. Finalize Reservation if you only want to use the lift."
+        flash[:notice] = "Your Lift Pass Reservation was created. Continue to reserve your gear & lodging if you need it."
         session[:lift_pass] = @lift_pass
         redirect_to new_reservation_path
       else
@@ -32,6 +31,10 @@ class LiftPassesController < ApplicationController
   end
 
   def show
+    if current_user.id != @lift_pass.user.id && current_user.admin? == false
+      flash[:error] = "You can only view your own lift passes."
+      redirect_to home_path
+    end
   end
 
   def edit
@@ -43,7 +46,9 @@ class LiftPassesController < ApplicationController
   end
 
   def destroy
+    session[:lift_pass] = nil
     @lift_pass.destroy
+    redirect_to home_path
   end
 
   private

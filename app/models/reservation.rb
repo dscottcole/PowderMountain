@@ -16,12 +16,14 @@ class Reservation < ApplicationRecord
             equipment_cost = eq_hash.values.map {|e| e.rental_price}.sum * self.gear_bag.duration
         end
 
-        lodging_cost = 0
+        lodg_cost = 0
         if self.lodging != nil
-        lodging_cost = self.lodging.price * self.duration
+        lodg_cost = self.lodging.price * self.duration
+        else
+            lodg_cost
         end
         
-        total_cost = lift_pass_cost + equipment_cost + lodging_cost
+        total_cost = lift_pass_cost + equipment_cost + lodg_cost
     end
 
     def lp_cost
@@ -46,9 +48,11 @@ class Reservation < ApplicationRecord
     end
 
     def lodging_cost
-        lodging_cost = 0
+        lodg_cost = 0
         if self.lodging != nil
-        lodging_cost = self.lodging.price * self.duration
+        lodg_cost = self.lodging.price * self.duration
+        else
+        lodg_cost
         end
     end
 

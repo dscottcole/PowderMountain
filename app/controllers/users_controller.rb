@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_action :get_user, :log_check, only: [:show, :edit, :update, :destroy]
   before_action :log_check, :admin_check, only: [:destroy, :index]
+  before_action :log_check, only: [:show, :edit, :update]
   before_action :nil_check, only: :new
     
   def index
@@ -30,7 +31,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
+    byebug
+    if current_user.id != params[:id].to_i && current_user.admin? == false
+      flash[:error] = "You can only edit your own profile."
+      redirect_to home_path
+    end
+
   end
 
   def update
@@ -69,10 +75,13 @@ class UsersController < ApplicationController
   end
 
   def logout
-    session[:user_id] = nil
+
+    clear_pending_lp
+    clear_pending_gb
     session[:lift_pass] = nil
     session[:gear_bag] = nil
-    redirect_to login_path
+    session[:user_id] = nil
+    redirect_to home_path
   end
 
   def home

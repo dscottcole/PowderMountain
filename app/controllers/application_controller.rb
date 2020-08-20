@@ -28,4 +28,20 @@ class ApplicationController < ActionController::Base
         50
     end
 
+    def clear_pending_lp
+        LiftPass.all.find_all {|l| l.user_id == current_user.id}.each do |lp|
+            if lp.reservation.nil?
+              lp.destroy
+            end
+        end
+    end
+
+    def clear_pending_gb
+        GearBag.all.find_all {|g| g.user_id == current_user.id}.each do |gb|
+            if gb.reservation.nil?
+              gb.destroy
+            end
+        end
+    end
+
 end

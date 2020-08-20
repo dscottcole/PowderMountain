@@ -1,20 +1,31 @@
-<h1> Powder Mountain's Available Lodging: </h1>
+<h1> Lodging Rentals: </h1>
 
-<h3> Available Lodgings: </h3>
-<p> Number of Campsites: <%= @camps.count %> </p>
-<p> Number of Cabins: <%= @cabins.count %> </p>
+<% if current_user.lodgings.nil? %>
+    <p> You have no lodging rentals to display. </p>
+<% end %>
 
+<% if !current_user.lodgings.nil? %>
 
+<h3> Current Lodging Rentals: </h3>
 
+    <% current_user.reservations.find_all {|r| r.start_date >= Date.today}.each do |rr| %>
+        <% if !rr.lodging_id.nil? %>
+            <%= link_to "Lodging Rental ##{rr.id} - Dates: #{rr.start_date} - #{rr.end_date}", lodging_rental_path(rr.id) %> <br>
+        <% end %>
+    <% end %>
 
-<% if current_user.admin? %>
- <h3> Lodging Management: </h3>
-    <% @lodgings.each do |l| %>
-    <%= link_to "#{l.lodging_name} Rented? #{l.rented}", lodging_path(l.id) %>
-    <br>
+<h3> Completed Lodging Rentals: </h3>
+
+    <% current_user.reservations.find_all {|r| r.start_date < Date.today}.each do |rr| %>
+        <% if !rr.lodging_id.nil? %>
+        <%= link_to "Lodging Rental ##{rr.id} - Dates: #{rr.start_date} - #{rr.end_date}", lodging_rental_path(rr.id) %> <br>
+        <% end %>
     <% end %>
 
 <% end %>
+<br>
+<br>
 
+<%= button_to "New Reservation", new_reservation_path, :method => "get" %>
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
