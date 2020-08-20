@@ -1,0 +1,13 @@
+<h1> Reserve Your Lift Pass (Lift Pass is Required)</h1>
+
+<h3> Current day pass price: $<%= lift_price %> </h3>
+
+
+<%= form_for @lift_pass do |f| %>
+    <%= f.label :start_date, "First day of shredding:" %>
+    <%= f.date_field :start_date %> <br>
+    <%= f.label :end_date, "Last day before you go back to the real world:" %>
+    <%= f.date_field :end_date %> <br>
+
+    <%= submit_tag("Create Pass") %>
+<% end %>

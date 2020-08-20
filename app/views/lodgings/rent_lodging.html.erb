@@ -1,8 +1,0 @@
-<h1> Select your Lodging: </h1>
-
-<%= form_for @reservation do |f| %>
-    <%= f.label :lodging_id, "Pick your room" %>
-    <%= f.option :lodging_id, [] %> <br>
-
-    <%= submit_tag("Rent Lodging") %>
-<% end %>

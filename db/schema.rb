@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 2020_08_18_234732) do
   end
 
   create_table "gear_bags", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "duration"
     t.integer "bike_id"
     t.integer "helmet_id"
     t.integer "pads_id"
@@ -45,8 +48,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_234732) do
   end
 
   create_table "lodgings", force: :cascade do |t|
-    t.string "lodge_type"
-    t.integer "number"
+    t.string "lodging_name"
     t.integer "price"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
@@ -57,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_234732) do
   create_table "reservations", force: :cascade do |t|
     t.date "start_date"
     t.date "end_date"
+    t.integer "duration"
     t.integer "user_id"
     t.boolean "rent_eq"
     t.integer "lodging_id"

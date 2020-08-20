@@ -1,11 +1,33 @@
 <h1> Create a New Reservation! </h1>
 
-<h3> Lift Pass </h3>
+<% if flash[:notice] %>
+    <p style="color:blue"> <%= flash[:notice] %> </p>
+<% end %>
+
+<% if flash[:error] %>
+    <% flash[:error].each do |k,v| %>
+   <p style="color:red"> <%= "#{k}: #{v}." %> </p>
+    <% end %>
+<% end %>
+
+<%= render partial: "lp_new" %>
+
+<%= render partial: "gb_new" %>
+
+<h1> Finalize Your Reservation. (Lodging is optional) </h1>
+
+<%= form_for @reservation do |f| %>
+
+    <%= f.label :start_date, "Lodging Check In Date:" %>
+    <%= f.date_field :start_date %> <br>
+    <%= f.label :end_date, "Lodging Check Out Date:" %>
+    <%= f.date_field :end_date %> <br>
+
+    <%= f.label "Available Lodgings:" %>
+    <%= f.collection_select :lodging_id, Lodging.av_lodging, :id, :lodging_name%> <br>
+    <br>
+
+    <%= submit_tag("Finalize Reservation") %>
+<% end %>
 
 
-
-<h3> Lodging </h3>
-
-
-
-<h3> Rent Equipment </h3>

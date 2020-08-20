@@ -3,19 +3,23 @@ class Lodging < ApplicationRecord
     has_many :users, through: :reservations
 
     def self.av_camp
-        self.all.find_all {|l| l.lodge_type == "Camp" && l.rented == false}
+        self.all.find_all {|l| l.lodging_name.include?("Camp") && l.rented == false}
     end
 
     def self.av_cabin
-        self.all.find_all {|l| l.lodge_type == "Cabin" && l.rented == false}
+        self.all.find_all {|l| l.lodging_name.include?("Cabin") && l.rented == false}
     end
 
     def self.uv_camp
-        self.all.find_all {|l| l.lodge_type == "Camp" && l.rented == true}
+        self.all.find_all {|l| l.lodging_name.include?("Camp") && l.rented == true}
     end
 
     def self.uv_cabin
-        self.all.find_all {|l| l.lodge_type == "Cabin" && l.rented == true}
+        self.all.find_all {|l| l.lodging_name.include?("Cabin") && l.rented == true}
+    end
+
+    def self.av_lodging
+        self.all.find_all {|l| l.rented == false}
     end
 
     def rent

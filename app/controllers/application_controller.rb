@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-    helper_method :current_user
+    helper_method :current_user, :lift_price
 
     def current_user
         @current_user = User.find_by(id: session[:user_id])
@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
         return unless !current_user.admin?
         flash[:error] = "Need admin rights to perform this action."
         redirect_to home_path
+    end
+
+    def lift_price
+        50
     end
 
 end
