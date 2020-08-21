@@ -1,6 +1,6 @@
 <h1>Reservation # <%= @reservation.id %> </h1>
 
-<h3> Shredder's Name: </h3> 
+<h3> Name: </h3> 
 <%= @reservation.user.name %>
 <% if @reservation.user.age < 18 %>
     <p style="color:red"> <%= "Under 18 shredder, must have a parent or legal guardian present to sign waiver!" %> 
@@ -35,11 +35,16 @@
 <p> Lodging Cost: $<%= @reservation.lodging_cost %> </p>
 <% end %>
 
-
 <h4> Total Reservation Cost: $<%= @reservation.total_cost %> </h4>
+
 
 <%= button_to "Back to Reservation History", reservations_path, :method => "get" %>
 <br>
+
+<% if @reservation.start_date >= Date.today %>
+<%= button_to "Cancel Reservation", reservation_path, :method => "delete" %>
+<br>
+<% end %>
 <%= button_to "Home", home_path, :method => "get" %>
 
 

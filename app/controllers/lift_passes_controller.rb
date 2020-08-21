@@ -17,7 +17,7 @@ class LiftPassesController < ApplicationController
       flash[:error] = [Lift_Pass_Date_Range_Error: "Please ensure that none of the lift pass dates are empty."]
       redirect_to new_reservation_path
     else
-      @lift_pass = LiftPass.new(start_date: lift_pass_params[:start_date], end_date: lift_pass_params[:end_date], duration: calculate_duration, price: lift_price, user_id: current_user.id )
+      @lift_pass = LiftPass.new(start_date: lift_pass_params[:start_date], end_date: lift_pass_params[:end_date], duration: calculate_duration, price: lift_price, user_id: current_user.id)
       if @lift_pass.valid?
         @lift_pass.save
         flash[:notice] = "Your Lift Pass Reservation was created. Continue to reserve your gear & lodging if you need it."
@@ -38,14 +38,40 @@ class LiftPassesController < ApplicationController
   end
 
   def edit
+    if @lift_pass.start_date >= Date.today
+
+    else
+      flash[:error] = "Your lift pass has lapsed and cannot be edited."
+      redirect_to lift_pass_path(@lift_pass.id)
+    end
+
   end
 
   def update
-    @lift_pass.update(lift_pass_params)
-    redirect_to lift_pass_path(@lift_pass)
+    
+    @lift_pass.attributes = {:start_date => lift_pass_params[:start_date], :end_date => lift_pass_params[:end_date], :duration => calculate_duration, :price => lift_price, :user_id => current_user.id}
+
+
+    if @lift_pass.valid?
+      @lift_pass.save
+      flash[:notice] = "Successfully updated lift pass!"
+      @lift_pass.reservation.attributes = {:total_cost => @lift_pass.reservation.calculate_cost}
+      
+      if @lift_pass.reservation.lodging_id.nil?
+        @lift_pass.reservation.attributes = {:start_date => lift_pass_params[:start_date], :end_date => lift_pass_params[:end_date]}
+      end
+      
+      @lift_pass.reservation.save
+      redirect_to lift_pass_path(@lift_pass.id)
+    else
+      flash[:error] = @lift_pass.errors.messages
+      redirect_to edit_lift_pass_path(@lift_pass.id)
+    end
+
   end
 
   def destroy
+    byebug
     session[:lift_pass] = nil
     @lift_pass.destroy
     redirect_to home_path

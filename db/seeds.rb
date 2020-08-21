@@ -13,12 +13,12 @@ tony = User.create(name: "Tony Tiger", age: 50, email:"tony@gmail.com", username
 
 camp1 = Lodging.create(lodging_name: "Camp 1", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.")
 Lodging.create(lodging_name: "Camp 2", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.")
-Lodging.create(lodging_name: "Camp 3", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.")
+Lodging.create(lodging_name: "Camp 3", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.").rent
 Lodging.create(lodging_name: "Camp 4", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.")
-Lodging.create(lodging_name: "Camp 5", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.")
-Lodging.create(lodging_name: "Camp 6", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.")
+Lodging.create(lodging_name: "Camp 5", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.").rent
+Lodging.create(lodging_name: "Camp 6", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.").rent
 Lodging.create(lodging_name: "Camp 7", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.")
-Lodging.create(lodging_name: "Camp 8", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.")
+Lodging.create(lodging_name: "Camp 8", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.").rent
 Lodging.create(lodging_name: "Camp 9", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.")
 Lodging.create(lodging_name: "Camp 10", price: 50, description: "Amazing view of the mountain-side, large enough for a 4-person tent.")
 
@@ -26,11 +26,11 @@ cabin1 = Lodging.create(lodging_name: "Cabin 1", price: 200, description: "This 
 cabin2 = Lodging.create(lodging_name: "Cabin 2", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.")
 cabin3 = Lodging.create(lodging_name: "Cabin 3", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.")
 Lodging.create(lodging_name: "Cabin 4", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.")
-Lodging.create(lodging_name: "Cabin 5", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.")
+Lodging.create(lodging_name: "Cabin 5", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.").rent
 Lodging.create(lodging_name: "Cabin 6", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.")
-Lodging.create(lodging_name: "Cabin 7", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.")
+Lodging.create(lodging_name: "Cabin 7", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.").rent
 Lodging.create(lodging_name: "Cabin 8", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.")
-Lodging.create(lodging_name: "Cabin 9", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.")
+Lodging.create(lodging_name: "Cabin 9", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.").rent
 Lodging.create(lodging_name: "Cabin 10", price: 200, description: "This cabin has luxurious amenities. Capacity for 4 people.")
 
 

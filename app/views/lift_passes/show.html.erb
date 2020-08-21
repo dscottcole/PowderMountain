@@ -1,27 +1,34 @@
 <h1> Lift Pass # <%= @lift_pass.id %> </h1>
 
-<h3> Shredder's Name: </h3> 
+<h3> Name: </h3> 
 <%= @lift_pass.user.name %>
 <% if @lift_pass.user.age < 18 %>
     <p style="color:red"> <%= "Under 18 shredder, must have a parent or legal guardian present to sign waiver!" %> 
+<% end %>
+
+<% if flash[:error] %>
+   <p style="color:red">  <%= flash[:error] %> </p>
 <% end %>
 
 <% if flash[:notice] %>
     <p style="color:blue"> <%= flash[:notice] %> </p>
 <% end %>
 
-<h3> Lift Pass # <%= @lift_pass.id %> </h3>
 <p> Start Date: <%= @lift_pass.start_date %> </p>
 <p> Duration: <%= @lift_pass.duration %> days </p>
-<% if !@lift_pass.reservation.nil? %>
-<p> Cost: $<%= Reservation.all.find_by(id: @lift_pass.id).lp_cost %> </p>
 
-<%= button_to "View Full Reservation", reservation_path(Reservation.all.find_by(id: @lift_pass.id).id), :method => "get" %>
-<br>
-<%= button_to "Home", home_path, :method => "get" %>
+<% if !@lift_pass.reservation.nil? %>
+    <p> Cost: $<%= Reservation.all.find_by(id: @lift_pass.reservation.id).lp_cost %> </p>
+        <% if @lift_pass.start_date >= Date.today %>
+        <%= button_to "Edit Lift Pass", edit_lift_pass_path(@lift_pass.id), :method => "get" %>
+        <br>
+        <% end %>
+    <%= button_to "View Full Reservation", reservation_path(Reservation.all.find_by(id: @lift_pass.reservation.id).id), :method => "get" %>
+    <br>
+    <%= button_to "Home", home_path, :method => "get" %>
 <% end %>
 
-<% if Reservation.all.find_by(id: @lift_pass.id).nil? %>
+<% if @lift_pass.reservation.nil? %>
 <p style="color:red"> This lift pass has not been secured. Finalize reservation to secure this lift pass! </p>
 <%= button_to "Return to Reservation", new_reservation_path, :method => "get" %>
 <%= button_to "Delete this pending pass", lift_pass_path, :method => "delete" %>

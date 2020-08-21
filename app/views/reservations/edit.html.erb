@@ -1,2 +1,23 @@
-<h1>Reservations#edit</h1>
-<p>Find me in app/views/reservations/edit.html.erb</p>
+<h1> Edit Your Lodging Reservation </h1>
+
+<% if flash[:error] %>
+   <p style="color:red">  <%= flash[:error] %> </p>
+<% end %>
+
+<% if flash[:notice] %>
+    <p style="color:blue"> <%= flash[:notice] %> </p>
+<% end %>
+
+<%= form_for @reservation do |f| %>
+
+    <%= f.label :start_date, "Lodging Check In Date:" %>
+    <%= f.date_field :start_date %> <br>
+    <%= f.label :end_date, "Lodging Check Out Date:" %>
+    <%= f.date_field :end_date %> <br>
+
+    <%= f.label "Available Lodgings:" %>
+    <%= f.collection_select :lodging_id, Lodging.av_lodging, :id, :lodging_name%> <br>
+    <br>
+
+    <%= submit_tag("Edit Lodging Reservation") %>
+<% end %>

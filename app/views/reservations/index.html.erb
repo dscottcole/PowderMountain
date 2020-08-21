@@ -1,4 +1,4 @@
-<h1> Reservations: </h1>
+<h1> Reservations </h1>
 
 <% if current_user.reservations.nil? %>
     <p> You have no reservations to display. </p>
@@ -22,6 +22,7 @@
 
 <% end %>
 <br>
+
 <br>
 <%= button_to "New Reservation", new_reservation_path, :method => "get" %>
 <br>
