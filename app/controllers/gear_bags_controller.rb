@@ -38,11 +38,29 @@ class GearBagsController < ApplicationController
   end
 
   def edit
+    if @gear_bag.start_date >= Date.today
+
+    else
+      flash[:error] = "Your gear rental has lapsed and cannot be edited."
+      redirect_to gear_bag_path(@lift_pass.id)
+    end
   end
 
   def update
-    @gear_bag.update(gear_bag_params)
-    redirect_to gear_bag_path(@gear_bag)
+    
+    @gear_bag.attributes = {:bike_id => gear_bag_params[:bike_id], :helmet_id => gear_bag_params[:helmet_id], :pads_id => gear_bag_params[:pads_id], :gloves_id => gear_bag_params[:gloves_id], :goggles_id => gear_bag_params[:goggles_id], :start_date => gear_bag_params[:start_date], :end_date => gear_bag_params[:end_date], :duration => calculate_duration, :user_id => current_user.id}
+  
+    if @gear_bag.valid?
+      @gear_bag.save
+      flash[:notice] = "Successfully updated gear bag!"
+      @gear_bag.reservation.attributes = {:total_cost => @gear_bag.reservation.calculate_cost}
+      @gear_bag.reservation.save
+      redirect_to gear_bag_path(@gear_bag.id)
+    else
+      flash[:error] = @gear_bag.errors.messages
+      redirect_to edit_gear_bag_path(@gear_bag.id)
+    end
+
   end
 
   def destroy

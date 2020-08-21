@@ -2,10 +2,14 @@
 <h4> Description: <%= @lodging.description %> </h4>
 <h4> Rented? <%= @lodging.rented %> </h4>
 
-<% if current_user.admin? %>
-<%= button_to "Edit This Lodge", edit_lodging_path, :method => "get" %>
-<%= button_to "Destroy This Lodge", lodging_path, :method => "delete" %>
-<% end %>
 <%= button_to "Lodging Rental History", lodgings_path, :method => "get" %>
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
+
+
+<% if current_user.admin? %>
+<h3> Admin Powers: </h3>
+<%= button_to "Edit This Lodging", edit_lodging_path, :method => "get" %>
+<%= button_to "Destroy This Lodging", lodging_path, :method => "delete" %>
+<% end %>
+

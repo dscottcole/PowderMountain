@@ -1,19 +1,32 @@
 <h1> Lodging Rental # <%= @reservation.id %> </h1>
 
-<h3> Shredder's Name: </h3> 
+<h3> Name: </h3> 
 <%= @reservation.user.name %>
 <% if @reservation.user.age < 18 %>
     <p style="color:red"> <%= "Under 18 shredder, must have a parent or legal guardian present to check in." %> 
 <% end %>
 
+<% if flash[:error] %>
+   <p style="color:red">  <%= flash[:error] %> </p>
+<% end %>
+
 <% if flash[:notice] %>
     <p style="color:blue"> <%= flash[:notice] %> </p>
 <% end %>
+
 <p> Lodging: <%= link_to @reservation.lodging.lodging_name, lodging_path(@reservation.lodging_id) %> </p>
 <p> Check-in Date: <%= @reservation.start_date %> </p>
 <p> Check-out Date: <%= @reservation.end_date %> </p>
 <p> Lodging Rental Cost: $<%= @reservation.lodging_cost %> </p>
 
+
+<% if @reservation.start_date >= Date.today %>
+<%= button_to "Edit Lodging Reservation", edit_reservation_path(@reservation.id), :method => "get" %>
+<br>
+<% end %>
+
+
 <%= button_to "View Full Reservation", reservation_path(@reservation.id), :method => "get" %>
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
+

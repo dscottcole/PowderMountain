@@ -1,4 +1,4 @@
-<h1> Powder Mountain's Available Lodging: </h1>
+<h1> Available Lodging </h1>
 
 <h4> Campsites </h4>
 <p> Average Price of Available Camps: $<%= (Lodging.av_camp.map {|l| l.price}.sum)/(Lodging.av_camp.count) %>
@@ -20,9 +20,9 @@
 
 
 <% if current_user.admin? %>
-<h3> Lodging Management: </h3>
+<h3> Admin Powers: </h3>
     <% @lodgings.each do |l| %>
-    <%= link_to "#{l.lodging_name} Rented? #{l.rented}", lodging_path(l.id) %>
+    <%= link_to "#{l.lodging_name} - Unavailable? #{l.rented}", lodging_path(l.id) %>
     <br>
     <% end %>
 <% end %>

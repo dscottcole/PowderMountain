@@ -1,2 +1,29 @@
-<h1>GearBag#edit</h1>
-<p>Find me in app/views/gear_bag/edit.html.erb</p>
+<h1> Reserve Your Gear (Renting Gear is Optional) </h1>
+
+<% if flash[:error] %>
+   <p style="color:red">  <%= flash[:error] %> </p>
+<% end %>
+
+<% if flash[:notice] %>
+    <p style="color:blue"> <%= flash[:notice] %> </p>
+<% end %>
+
+<%= form_for @gear_bag do |f| %>
+    <%= f.label "Select a bike (model - size): " %>
+    <%= f.collection_select :bike_id, Equipment.bikes, :id, :eq_name %> <br>
+    <%= f.label "Select a helmet (model - size): " %>
+    <%= f.collection_select :helmet_id, Equipment.helmets, :id, :eq_name %> <br>
+    <%= f.label "Select your pads (model - size): " %>
+    <%= f.collection_select :pads_id, Equipment.pads, :id, :eq_name %> <br>
+    <%= f.label "Select your gloves (model - size): " %>
+    <%= f.collection_select :gloves_id, Equipment.gloves, :id, :eq_name %> <br>
+    <%= f.label "Select goggles: " %>
+    <%= f.collection_select :goggles_id, Equipment.goggles, :id, :eq_name %> <br>
+    <br>
+    <%= f.label :start_date, "Rental Gear Pick-up Date:" %>
+    <%= f.date_field :start_date %> <br>
+    <%= f.label :end_date, "Rental Gear Return Date" %>
+    <%= f.date_field :end_date %> <br>
+
+<%= f.submit "Edit Gear" %>
+<% end %>

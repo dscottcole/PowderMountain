@@ -6,6 +6,13 @@
     <p style="color:red"> <%= "Under 18 shredder, must have a parent or legal guardian present to sign waiver!" %> 
 <% end %>
 
+<% if flash[:error] %>
+   <p style="color:red">  <%= flash[:error] %> </p>
+<% end %>
+
+<% if flash[:notice] %>
+    <p style="color:blue"> <%= flash[:notice] %> </p>
+<% end %>
 
 <p> Rental Start Date: <%= @gear_bag.start_date %> </p>
 <p> Rental Return Date: <%= @gear_bag.end_date %> </p>
@@ -22,10 +29,14 @@
 <% end %>
 
 <% if !@gear_bag.reservation.nil? %>
-<br>
-<%= button_to "View Full Reservation", reservation_path(Reservation.all.find_by(id: @gear_bag.reservation.id).id), :method => "get" %>
-<br>
-<%= button_to "Home", home_path, :method => "get" %>
+    <br>
+    <% if @gear_bag.start_date >= Date.today %>
+        <%= button_to "Edit Gear Bag", edit_gear_bag_path(@gear_bag.id), :method => "get" %>
+        <br>
+    <% end %>
+    <%= button_to "View Full Reservation", reservation_path(Reservation.all.find_by(id: @gear_bag.reservation.id).id), :method => "get" %>
+    <br>
+    <%= button_to "Home", home_path, :method => "get" %>
 <% end %>
 
 <% if @gear_bag.reservation.nil? %>

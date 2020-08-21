@@ -111,16 +111,52 @@ class ReservationsController < ApplicationController
     end
   end
 
-  # def edit
-  # end
+  def edit
+    if @reservation.start_date >= Date.today
 
-  # def update
-  #   @reservation.update(reservation_params)
-  #   redirect_to reservation_path(@reservation)
-  # end
+    else
+      flash[:error] = "Your lift pass has lapsed and cannot be edited."
+      redirect_to lodging_rental_path(@reservation.id)
+    end
+  end
+
+  def update
+
+    @reservation.attributes = {:start_date => reservation_params[:start_date], :end_date => reservation_params[:end_date], :lodging_id => reservation_params[:lodging_id], :duration => calculate_duration}
+  
+    if @reservation.valid?
+      @reservation.save
+      flash[:notice] = "Successfully updated lodging reservation!"
+      @reservation.attributes = {:total_cost => @reservation.calculate_cost}
+      @reservation.save
+      redirect_to lodging_rental_path(@reservation.id)
+    else
+      flash[:error] = @reservation.errors.messages
+      redirect_to lodging_rental_path(@reservation.id)
+    end
+
+  end
 
   def destroy
-    @reservation.destroy
+    
+
+    if @reservation.start_date >= Date.today
+      @reservation.lift_pass.destroy
+  
+      if !@reservation.gear_bag.nil?
+        @reservation.gear_bag.destroy
+      end
+
+      @reservation.destroy
+
+      flash[:notice] = "Your reservation has been obliterated."
+      redirect_to home_path
+
+    else
+      flash[:error] = "Your lift pass has lapsed and cannot be edited."
+      redirect_to lodging_rental_path(@reservation.id)
+    end
+
   end
 
   def lodging_rental

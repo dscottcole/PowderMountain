@@ -34,6 +34,11 @@ body {
    <p style="color:red">  <%= flash[:error] %> </p>
 <% end %>
 
+<% if flash[:notice] %>
+    <p style="color:blue"> <%= flash[:notice] %> </p>
+<% end %>
+
+
 <%= button_to "View Available Lodging", available_lodging_path, :method => "get" %>
 <br>
 <%= button_to "Lift Pass History", lift_passes_path, :method => "get" %>
@@ -49,7 +54,7 @@ body {
 
 <br>
 <% if current_user.admin? %>
-<h3> Admin Capabilities </h3>
+<h3> Admin Powers: </h3>
 <%= button_to "User Index", users_path, :method => "get" %>
 <%= button_to "Create Lodging", new_lodging_path, :method => "get" %>
 
