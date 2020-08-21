@@ -6,6 +6,11 @@ class GearBag < ApplicationRecord
     validate :on_or_after_today
     validates :start_date, :end_date, :presence => true
 
+
+    def gb_breakdown_helper
+        eq_hash = { bike: Equipment.find_by(id: self.bike_id), helmet: Equipment.find_by(id: self.helmet_id), pads: Equipment.find_by(id: self.pads_id), gloves: Equipment.find_by(id: self.gloves_id), goggles: Equipment.find_by(id: self.goggles_id)}
+    end
+
 private
     
     def end_after_start
@@ -24,7 +29,4 @@ private
         end 
     end
 
-    def gb_breakdown_helper
-    eq_hash = { bike: Equipment.find_by(id: self.bike_id), helmet: Equipment.find_by(id: self.helmet_id), pads: Equipment.find_by(id: self.pads_id), gloves: Equipment.find_by(id: self.gloves_id), goggles: Equipment.find_by(id: self.goggles_id)}
-    end
 end

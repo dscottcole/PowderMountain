@@ -1,7 +1,5 @@
-<h1>Reservation # <%= @reservation.id %> </h1>
+<div class='text-center'>
 
-<h3> Name: </h3> 
-<%= @reservation.user.name %>
 <% if @reservation.user.age < 18 %>
     <p style="color:red"> <%= "Under 18 shredder, must have a parent or legal guardian present to sign waiver!" %> 
 <% end %>
@@ -23,8 +21,9 @@
 <p> Gear Rental Cost: $<%= @reservation.rental_cost %> </p>
 
 <% @reservation.rental_eq.each do |k| %>
-<%= "#{k[1].equipment_type}: #{k[1].eq_name},   Rental Price: $#{k[1].rental_price} per day" %> <br>
+<%= "#{k[1].equipment_type}: #{k[1].eq_name}" %> <br>
 <% end %>
+<br>
 <% end %>
 
 <% if @reservation.lodging_id != nil %>
@@ -46,6 +45,7 @@
 <br>
 <% end %>
 <%= button_to "Home", home_path, :method => "get" %>
+</div>
 
 
 

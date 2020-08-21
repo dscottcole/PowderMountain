@@ -1,15 +1,31 @@
+<div class='text-center'>
 <h1> <%= @lodging.lodging_name %> </h1>
+<br>
+
+<% if flash[:error] %>
+   <p style="color:red">  <%= flash[:error] %> </p>
+<% end %>
+
+<% if flash[:notice] %>
+    <p style="color:blue"> <%= flash[:notice] %> </p>
+<% end %>
+
+
+<h4> Price: $<%= @lodging.price %> </h4>
 <h4> Description: <%= @lodging.description %> </h4>
-<h4> Rented? <%= @lodging.rented %> </h4>
+<h4> Unavailable? <%= @lodging.rented %> </h4>
+<br>
 
 <%= button_to "Lodging Rental History", lodgings_path, :method => "get" %>
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
-
+<br>
 
 <% if current_user.admin? %>
 <h3> Admin Powers: </h3>
 <%= button_to "Edit This Lodging", edit_lodging_path, :method => "get" %>
 <%= button_to "Destroy This Lodging", lodging_path, :method => "delete" %>
 <% end %>
+
+</div>
 

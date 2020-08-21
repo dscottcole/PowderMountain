@@ -81,8 +81,8 @@ gb3 = GearBag.new(start_date: "2020-08-01", end_date: "2020-08-05", duration: 4,
 gb4 = GearBag.new(start_date: "2020-08-01", end_date: "2020-08-05", duration: 4, bike_id: eq2.id, helmet_id: eq4.id, pads_id: eq5.id, gloves_id: eq6.id, goggles_id: eq7.id, user_id: ben.id).save(validate: false)
 gb5 = GearBag.new(start_date: "2020-08-01", end_date: "2020-08-05", duration: 4, bike_id: eq3.id , helmet_id: eq4.id, pads_id: eq5.id, gloves_id: eq6.id, goggles_id: eq7.id, user_id: tony.id).save(validate: false)
 
-res1 = Reservation.create(start_date: "2020-08-30", end_date: "2020-09-05", duration: 1, user_id: dan.id, gear_bag_id: gb1.id, rent_eq: true, lodging_id: camp1.id, lift_pass_id: lp1.id, total_cost: 200)
-res2 = Reservation.create(start_date: "2020-08-30", end_date: "2020-09-09", duration: 6, user_id: ben.id, gear_bag_id: gb2.id, rent_eq: true, lodging_id: cabin1.id, lift_pass_id: lp2.id, total_cost: 2275)
+res1 = Reservation.create(start_date: "2020-08-30", end_date: "2020-09-05", duration: 1, user_id: dan.id, gear_bag_id: gb1.id, rent_eq: true, lodging_id: camp1.id, lift_pass_id: lp1.id, total_cost: 275)
+res2 = Reservation.create(start_date: "2020-08-30", end_date: "2020-09-09", duration: 6, user_id: ben.id, gear_bag_id: gb2.id, rent_eq: true, lodging_id: cabin1.id, lift_pass_id: lp2.id, total_cost: 2700)
 res3 = Reservation.new(start_date: "2020-08-01", end_date: "2020-08-05", duration: 4, user_id: dan.id, gear_bag_id: 3, rent_eq: true, lodging_id: 11, lift_pass_id: 3, total_cost: 1700).save(validate: false)
 res4 = Reservation.new(start_date: "2020-08-01", end_date: "2020-08-05", duration: 4, user_id: ben.id, gear_bag_id: 4, rent_eq: true, lodging_id: 12, lift_pass_id: 4, total_cost: 1800).save(validate: false)
 res5 = Reservation.new(start_date: "2020-08-01", end_date: "2020-08-05", duration: 4, user_id: tony.id, gear_bag_id: 5, rent_eq: true, lodging_id: 13, lift_pass_id: 5, total_cost: 1800).save(validate: false)

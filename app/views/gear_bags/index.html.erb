@@ -1,4 +1,5 @@
-<h1> Gear Bags: </h1>
+<div class='text-center'>
+
 
 <% if current_user.gear_bags.nil? %>
     <p> You have no gear rentals to display. </p>
@@ -11,6 +12,7 @@
     <% current_user.gear_bags.find_all {|g| g.start_date >= Date.today}.each do |gb| %>
         <%= link_to "Gear Bag ##{gb.id} - Dates: #{gb.start_date} - #{gb.end_date}", gear_bag_path(gb.id) %> <br>
     <% end %>
+    <br>
 
 <h3> Completed Gear Bags: </h3>
 
@@ -26,3 +28,4 @@
 <%= button_to "New Reservation", new_reservation_path, :method => "get" %>
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
+</div>

@@ -31,7 +31,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    byebug
     if current_user.id != params[:id].to_i && current_user.admin? == false
       flash[:error] = "You can only edit your own profile."
       redirect_to home_path

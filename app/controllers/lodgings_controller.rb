@@ -25,13 +25,23 @@ class LodgingsController < ApplicationController
   end
 
   def update
-    @lodging.update(lodging_params)
-    redirect_to lodging_path(@lodging)
+    byebug
+    @lodging.attributes = {:lodging_name => lodging_params[:lodging_name], :price => lodging_params[:price], :description => lodging_params[:description]}
+
+    if @lodging.valid?
+      @lodging.save
+      flash[:notice] = "Lodging edit was successful."
+      redirect_to lodging_path(@lodging)
+    else
+      flash[:error] = @lodging.errors.messages
+      redirect_to edit_lodging_path(@lodging)
+    end
   end
 
   def destroy
     @lodging.destroy
-    redirect_to lodgings_path
+    flash[:notice] = "Lodging has been destroyed."
+    redirect_to home_path
   end
 
   def available_lodging

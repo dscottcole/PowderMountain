@@ -1,3 +1,5 @@
+<div class='text-center'>
+
 <h1> <%= @user.name %> </h1>
 
 <% if flash[:notice] %>
@@ -7,7 +9,7 @@
     <p> Age: <%= @user.age %> </p>
     <p> Email: <%= @user.email %> </p>
     <p> Username: <%= @user.username %> </p>
-    <p> Member since: <%= @user.created_at %> </p>
+    <p> Member since: <%= @user.created_at.to_date %> </p>
 
     <% if current_user.id == @user.id || current_user.admin? %>
     <%= button_to "Edit User Info", edit_user_path(@user.id), :method => "get" %>
@@ -17,5 +19,5 @@
     <% end %>
     <br>
     <%= button_to "Home", home_path, :method => "get" %>
-
+</div>
 

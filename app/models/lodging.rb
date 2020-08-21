@@ -2,6 +2,8 @@ class Lodging < ApplicationRecord
     has_many :reservations
     has_many :users, through: :reservations
 
+    validates :lodging_name, uniqueness: true
+
     def self.av_camp
         self.all.find_all {|l| l.lodging_name.include?("Camp") && l.rented == false}
     end
