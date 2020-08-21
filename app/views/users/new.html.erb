@@ -22,8 +22,8 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %> <br>
 
-    <%= submit_tag("Create User") %>
+    <%= f.submit "Create User", {:class => "btn btn-outline-dark" } %>
   <% end %>
   <br>
-  <%= button_to "Home", home_path, :method => "get" %>
+  <%= button_to "Home", home_path, :class => "btn btn-outline-dark", :method => "get" %>
 </div>

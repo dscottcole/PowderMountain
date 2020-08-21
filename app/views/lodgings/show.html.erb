@@ -16,15 +16,15 @@
 <h4> Unavailable? <%= @lodging.rented %> </h4>
 <br>
 
-<%= button_to "Lodging Rental History", lodgings_path, :method => "get" %>
+<%= button_to "Lodging Rental History", lodgings_path, :class => "btn btn-outline-dark", :method => "get" %>
 <br>
-<%= button_to "Home", home_path, :method => "get" %>
+<%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
 <br>
 
 <% if current_user.admin? %>
 <h3> Admin Powers: </h3>
-<%= button_to "Edit This Lodging", edit_lodging_path, :method => "get" %>
-<%= button_to "Destroy This Lodging", lodging_path, :method => "delete" %>
+<%= button_to "Edit This Lodging", edit_lodging_path, :class => "btn btn-outline-dark", :method => "get" %>
+<%= button_to "Destroy This Lodging", lodging_path, :class => "btn btn-outline-dark", :method => "delete" %>
 <% end %>
 
 </div>

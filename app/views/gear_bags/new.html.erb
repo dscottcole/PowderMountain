@@ -15,7 +15,7 @@
     <%= f.collection_select :goggles_id, Equipment.goggles, :id, :eq_name %> <br>
     <br>
 
-<%= f.submit "Add to Gear Bag" %>
+<%= f.submit "Add to Gear Bag", {:class => "btn btn-outline-dark" } %>
 <% end %>
 
 </div>

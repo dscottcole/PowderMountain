@@ -1,5 +1,6 @@
 <div class='text-center'>
 
+
 <h1> Powder Mountain Park </h1>
 
 <% if flash[:error] %>
@@ -17,10 +18,11 @@
     <%= f.text_field "login[username]" %> <br>
     <%= f.label :password %>
     <%= f.password_field "login[password]" %> <br>
-    <%= submit_tag("Log In") %>
+    <%= f.submit "Log In", {:class => "btn btn-outline-dark" } %>
 <% end %>
 
 <p> No existing account? </p>
-<%= button_to "Create New Account", new_user_path, :method => "get" %>
-</div>
+<%= button_to "Create New Account", new_user_path, :class => "btn btn-outline-dark", :method => "get" %>
+
+
 </div>

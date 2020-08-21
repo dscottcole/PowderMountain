@@ -1,8 +1,7 @@
 <div class='text-center'>
 <h1> Lift Pass # <%= @lift_pass.id %> </h1>
 
-<h3> Name: </h3> 
-<%= @lift_pass.user.name %>
+
 <% if @lift_pass.user.age < 18 %>
     <p style="color:red"> <%= "Under 18 shredder, must have a parent or legal guardian present to sign waiver!" %> 
 <% end %>
@@ -21,18 +20,18 @@
 <% if !@lift_pass.reservation.nil? %>
     <p> Cost: $<%= Reservation.all.find_by(id: @lift_pass.reservation.id).lp_cost %> </p>
         <% if @lift_pass.start_date >= Date.today %>
-        <%= button_to "Edit Lift Pass", edit_lift_pass_path(@lift_pass.id), :method => "get" %>
+        <%= button_to "Edit Lift Pass", edit_lift_pass_path(@lift_pass.id), :class => "btn btn-outline-dark", :method => "get" %>
         <br>
         <% end %>
-    <%= button_to "View Full Reservation", reservation_path(Reservation.all.find_by(id: @lift_pass.reservation.id).id), :method => "get" %>
+    <%= button_to "View Full Reservation", reservation_path(Reservation.all.find_by(id: @lift_pass.reservation.id).id), :class => "btn btn-outline-dark", :method => "get" %>
     <br>
-    <%= button_to "Home", home_path, :method => "get" %>
+    <%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
 <% end %>
 
 <% if @lift_pass.reservation.nil? %>
 <p style="color:red"> This lift pass has not been secured. Finalize reservation to secure this lift pass! </p>
-<%= button_to "Return to Reservation", new_reservation_path, :method => "get" %>
-<%= button_to "Delete this pending pass", lift_pass_path, :method => "delete" %>
+<%= button_to "Return to Reservation", new_reservation_path, :class => "btn btn-outline-dark", :method => "get" %>
+<%= button_to "Delete this pending pass", lift_pass_path, :class => "btn btn-danger", :method => "delete" %>
 <% end %>
 
 </div>

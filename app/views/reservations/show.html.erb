@@ -37,14 +37,14 @@
 <h4> Total Reservation Cost: $<%= @reservation.total_cost %> </h4>
 
 
-<%= button_to "Back to Reservation History", reservations_path, :method => "get" %>
+<%= button_to "Back to Reservation History", reservations_path, :class => "btn btn-outline-dark", :method => "get" %>
 <br>
 
 <% if @reservation.start_date >= Date.today %>
-<%= button_to "Cancel Reservation", reservation_path, :method => "delete" %>
+<%= button_to "Cancel Reservation", reservation_path, :class => "btn btn-danger", :method => "delete" %>
 <br>
 <% end %>
-<%= button_to "Home", home_path, :method => "get" %>
+<%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
 </div>
 
 

@@ -10,6 +10,6 @@
     <%= f.label :end_date, "Last day before you go back to the real world:" %>
     <%= f.date_field :end_date %> <br>
 
-    <%= submit_tag("Create Pass") %>
+    <%= f.submit "Create Pass", {:class => "btn btn-outline-dark" } %>
 <% end %>
 </div>

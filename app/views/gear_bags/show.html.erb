@@ -32,12 +32,12 @@
 <% if !@gear_bag.reservation.nil? %>
     <br>
     <% if @gear_bag.start_date >= Date.today %>
-        <%= button_to "Edit Gear Bag", edit_gear_bag_path(@gear_bag.id), :method => "get" %>
+        <%= button_to "Edit Gear Bag", edit_gear_bag_path(@gear_bag.id), :class => "btn btn-outline-dark", :method => "get" %>
         <br>
     <% end %>
-    <%= button_to "View Full Reservation", reservation_path(Reservation.all.find_by(id: @gear_bag.reservation.id).id), :method => "get" %>
+    <%= button_to "View Full Reservation", reservation_path(Reservation.all.find_by(id: @gear_bag.reservation.id).id), :class => "btn btn-outline-dark", :method => "get" %>
     <br>
-    <%= button_to "Home", home_path, :method => "get" %>
+    <%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
 <% end %>
 
 <% if @gear_bag.reservation.nil? %>
@@ -48,9 +48,9 @@
 <br>
 
 <p style="color:red"> This gear bag has not been secured. Finalize reservation to secure this gear bag! </p>
-<%= button_to "Return to Reservation", new_reservation_path, :method => "get" %>
+<%= button_to "Return to Reservation", new_reservation_path, :class => "btn btn-outline-dark", :method => "get" %>
 <br>
-<%= button_to "Delete Pending Gear Rental", gear_bag_path, :method => "delete" %>
+<%= button_to "Delete Pending Gear Rental", gear_bag_path, :class => "btn btn-danger", :method => "delete" %>
 <% end %>
 
 </div>
