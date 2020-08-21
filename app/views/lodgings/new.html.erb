@@ -1,4 +1,6 @@
+<div class='text-center'>
 <h1> Lodging Creation Page </h1>
+<br>
 
 <% if flash[:error] %>
     <% flash[:error].each do |k,v| %>
@@ -11,7 +13,6 @@
     <%= f.label :lodging_name, "Lodging Type + Number:" %>
     <%= f.text_field :lodging_name %> <br>
     <br>
-    <br>
     <%= f.label :price, "Price per night:" %>
     <%= f.text_field :price %>
     <br>
@@ -19,8 +20,9 @@
     <%= f.label :description, "Description:" %>
     <%= f.text_area:description %>
     <br>
-    <br>
     <%= submit_tag("Create Lodging") %>
   <% end %>
   <br>
   <%= button_to "Home", home_path, :method => "get" %>
+  
+  </div>

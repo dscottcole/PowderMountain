@@ -1,7 +1,6 @@
+<div class='text-center'>
 <h1> Lodging Rental # <%= @reservation.id %> </h1>
 
-<h3> Name: </h3> 
-<%= @reservation.user.name %>
 <% if @reservation.user.age < 18 %>
     <p style="color:red"> <%= "Under 18 shredder, must have a parent or legal guardian present to check in." %> 
 <% end %>
@@ -29,4 +28,6 @@
 <%= button_to "View Full Reservation", reservation_path(@reservation.id), :method => "get" %>
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
+
+</div>
 

@@ -1,4 +1,4 @@
-<h1> Reservations </h1>
+<div class='text-center'>
 
 <% if current_user.reservations.nil? %>
     <p> You have no reservations to display. </p>
@@ -12,6 +12,7 @@
     <% current_user.reservations.find_all {|r| r.start_date >= Date.today}.each do |rr| %>
         <%= link_to "Reservation ##{rr.id} - Dates: #{rr.start_date} - #{rr.end_date}", reservation_path(rr.id) %> <br>
     <% end %>
+<br>
 
 
 <h3> Completed Reservations: </h3>
@@ -27,3 +28,4 @@
 <%= button_to "New Reservation", new_reservation_path, :method => "get" %>
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
+</div>

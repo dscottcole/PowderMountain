@@ -1,3 +1,5 @@
+<div class='text-center'>
+
 <h1> User Edit Page </h1>
 
 <% if flash[:error] %>
@@ -10,16 +12,17 @@
 <%= form_for @user do |f| %>
     <%= f.label :name, "Full Name:" %>
     <%= f.text_field :name %> <br>
-    <%= f.label :age %>
+    <%= f.label :age, "Age:" %>
     <%= f.text_field :age %> <br>
-    <%= f.label :email %>
+    <%= f.label :email, "Email:" %>
     <%= f.text_field :email %> <br>
     <%= f.label :password, "New Password:" %>
     <%= f.password_field :password %> <br>
-    <%= f.label :password_confirmation, "Repeat New Password" %>
+    <%= f.label :password_confirmation, "Repeat New Password:" %>
     <%= f.password_field :password_confirmation %> <br>
 
     <%= submit_tag("Confirm Edit User") %>
   <% end %>
   <br>
   <%= button_to "Home", home_path, :method => "get" %>
+  </div>

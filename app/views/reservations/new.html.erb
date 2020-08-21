@@ -1,4 +1,4 @@
-<h1> Create a New Reservation! </h1>
+<div class='text-center'>
 
 <% if flash[:notice] %>
     <p style="color:blue"> <%= flash[:notice] %> </p>
@@ -18,13 +18,13 @@
 <% end %>
 
 <%= render partial: "gb_new" %>
-
+<br>
 <% if !session[:gear_bag].nil? %>
     <p style="color:blue"> You have one pending gear rental. Finalize reservation to make it official! </p>
     <%= button_to "View Pending Gear Bag", gear_bag_path(session[:gear_bag]["id"]), :method => "get" %>
 <% end %>
 
-<h1> Finalize Your Reservation. (Lodging is optional) </h1>
+<h1> Finalize Your Reservation (Optional) </h1>
 
 <%= form_for @reservation do |f| %>
 
@@ -42,4 +42,4 @@
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
 
-
+</div>

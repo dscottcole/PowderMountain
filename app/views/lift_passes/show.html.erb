@@ -1,3 +1,4 @@
+<div class='text-center'>
 <h1> Lift Pass # <%= @lift_pass.id %> </h1>
 
 <h3> Name: </h3> 
@@ -33,3 +34,5 @@
 <%= button_to "Return to Reservation", new_reservation_path, :method => "get" %>
 <%= button_to "Delete this pending pass", lift_pass_path, :method => "delete" %>
 <% end %>
+
+</div>

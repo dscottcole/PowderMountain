@@ -1,7 +1,6 @@
+<div class='text-center'>
 <h1>Gear Bag # <%= @gear_bag.id %> </h1>
 
-<h3> Shredder's Name: </h3> 
-<%= @gear_bag.user.name %>
 <% if @gear_bag.user.age < 18 %>
     <p style="color:red"> <%= "Under 18 shredder, must have a parent or legal guardian present to sign waiver!" %> 
 <% end %>
@@ -24,7 +23,7 @@
 <h4> Gear Breakdown: </h4>
 
     <% Reservation.all.find_by(id: @gear_bag.reservation.id).rental_eq.each do |k| %>
-        <%= "#{k[1].equipment_type}: #{k[1].eq_name},   Rental Price: $#{k[1].rental_price} per day" %> <br>
+        <%= "#{k[1].equipment_type}: #{k[1].eq_name}" %> <br>
     <% end %>
 <% end %>
 
@@ -44,3 +43,5 @@
 <%= button_to "Return to Reservation", new_reservation_path, :method => "get" %>
 <%= button_to "Delete Pending Gear Rental", gear_bag_path, :method => "delete" %>
 <% end %>
+
+</div>

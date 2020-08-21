@@ -1,4 +1,4 @@
-<h1> Lift Passes: </h1>
+<div class='text-center'>
 
 <% if current_user.lift_passes.nil? %>
     <p> You have no lift passes to display. </p>
@@ -11,6 +11,7 @@
     <% current_user.lift_passes.find_all {|p| p.start_date >= Date.today}.each do |pp| %>
         <%= link_to "Lift Pass ##{pp.id} - Dates: #{pp.start_date} - #{pp.end_date}", lift_pass_path(pp.id) %> <br>
     <% end %>
+    <br>
 
 <h3> Completed Lift Passes: </h3>
 
@@ -25,3 +26,4 @@
 <%= button_to "New Reservation", new_reservation_path, :method => "get" %>
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
+</div>

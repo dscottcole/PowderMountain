@@ -1,4 +1,4 @@
-<h1> Lodging Rentals: </h1>
+<div class='text-center'>
 
 <% if current_user.lodgings.nil? %>
     <p> You have no lodging rentals to display. </p>
@@ -13,7 +13,7 @@
             <%= link_to "Lodging Rental ##{rr.id} - Dates: #{rr.start_date} - #{rr.end_date}", lodging_rental_path(rr.id) %> <br>
         <% end %>
     <% end %>
-
+<br>
 <h3> Completed Lodging Rentals: </h3>
 
     <% current_user.reservations.find_all {|r| r.start_date < Date.today}.each do |rr| %>
@@ -29,3 +29,5 @@
 <%= button_to "New Reservation", new_reservation_path, :method => "get" %>
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
+
+</div>

@@ -1,3 +1,4 @@
+<div class='text-center'>
 <h1> <%= @lodging.lodging_name %> </h1>
 <h4> Description: <%= @lodging.description %> </h4>
 <h4> Rented? <%= @lodging.rented %> </h4>
@@ -12,4 +13,6 @@
 <%= button_to "Edit This Lodging", edit_lodging_path, :method => "get" %>
 <%= button_to "Destroy This Lodging", lodging_path, :method => "delete" %>
 <% end %>
+
+</div>
 

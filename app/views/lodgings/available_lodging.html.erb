@@ -1,3 +1,4 @@
+<div class='text-center'>
 <h1> Available Lodging </h1>
 
 <h4> Campsites </h4>
@@ -16,7 +17,7 @@
 <%= button_to "New Reservation", new_reservation_path, :method => "get" %>
 <br>
 <%= button_to "Home", home_path, :method => "get" %>
-
+<br>
 
 
 <% if current_user.admin? %>
@@ -26,3 +27,5 @@
     <br>
     <% end %>
 <% end %>
+
+</div>
