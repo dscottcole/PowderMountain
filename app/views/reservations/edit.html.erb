@@ -20,9 +20,9 @@
     <%= f.collection_select :lodging_id, Lodging.av_lodging, :id, :lodging_name%> <br>
     <br>
 
-    <%= submit_tag("Edit Lodging Reservation") %>
+    <%= f.submit "Edit Lodging Reservation", {:class => "btn btn-outline-dark" } %>
 <% end %>
 
 <br>
-<%= button_to "Home", home_path, :method => "get" %>
+<%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
 </div>

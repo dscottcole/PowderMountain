@@ -1,5 +1,6 @@
 <div class='text-center'>
 
+
 <% if flash[:notice] %>
     <p style="color:blue"> <%= flash[:notice] %> </p>
 <% end %>
@@ -14,14 +15,14 @@
 
 <% if !session[:lift_pass].nil? %>
     <p style="color:blue"> You have one pending lift pass. Finalize reservation to make it official! </p>
-    <%= button_to "View Pending Lift Pass", lift_pass_path(session[:lift_pass]["id"]), :method => "get" %>
+    <%= button_to "View Pending Lift Pass", lift_pass_path(session[:lift_pass]["id"]), :class => "btn btn-outline-dark", :method => "get" %>
 <% end %>
 
 <%= render partial: "gb_new" %>
 <br>
 <% if !session[:gear_bag].nil? %>
     <p style="color:blue"> You have one pending gear rental. Finalize reservation to make it official! </p>
-    <%= button_to "View Pending Gear Bag", gear_bag_path(session[:gear_bag]["id"]), :method => "get" %>
+    <%= button_to "View Pending Gear Bag", gear_bag_path(session[:gear_bag]["id"]), :class => "btn btn-outline-dark", :method => "get" %>
     <br>
 <% end %>
 
@@ -39,9 +40,10 @@
     <%= f.collection_select :lodging_id, Lodging.av_lodging, :id, :lodging_name%> <br>
     <br>
 
-    <%= submit_tag("Finalize Reservation") %>
+    <%= f.submit "Finalize Reservation", {:class => "btn btn-outline-dark" } %>
 <% end %>
 <br>
-<%= button_to "Home", home_path, :method => "get" %>
+<%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
+
 
 </div>

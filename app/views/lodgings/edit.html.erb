@@ -21,9 +21,9 @@
     <%= f.label :description, "Description:" %>
     <%= f.text_area:description %>
     <br>
-    <%= submit_tag("Edit Lodging") %>
+    <%= f.submit "Edit Lodging", {:class => "btn btn-outline-dark" } %>
   <% end %>
 
   <br>
-  <%= button_to "Home", home_path, :method => "get" %>
+  <%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
   </div>

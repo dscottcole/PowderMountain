@@ -21,8 +21,8 @@
     <%= f.label :password_confirmation, "Repeat New Password:" %>
     <%= f.password_field :password_confirmation %> <br>
 
-    <%= submit_tag("Confirm Edit User") %>
+    <%= f.submit "Confirm Edit User", {:class => "btn btn-outline-dark" } %>
   <% end %>
   <br>
-  <%= button_to "Home", home_path, :method => "get" %>
+  <%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
   </div>

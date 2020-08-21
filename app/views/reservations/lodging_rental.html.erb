@@ -20,14 +20,14 @@
 
 
 <% if @reservation.start_date >= Date.today %>
-<%= button_to "Edit Lodging Reservation", edit_reservation_path(@reservation.id), :method => "get" %>
+<%= button_to "Edit Lodging Reservation", edit_reservation_path(@reservation.id), :class => "btn btn-outline-dark", :method => "get" %>
 <br>
 <% end %>
 
 
-<%= button_to "View Full Reservation", reservation_path(@reservation.id), :method => "get" %>
+<%= button_to "View Full Reservation", reservation_path(@reservation.id), :class => "btn btn-outline-dark", :method => "get" %>
 <br>
-<%= button_to "Home", home_path, :method => "get" %>
+<%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
 
 </div>
 

@@ -24,8 +24,10 @@
 <% end %>
 <br>
 
+<div class="bottom-button">
 <br>
-<%= button_to "New Reservation", new_reservation_path, :method => "get" %>
+<%= button_to "New Reservation", new_reservation_path, :class => "btn btn-outline-dark", :method => "get" %>
 <br>
-<%= button_to "Home", home_path, :method => "get" %>
+<%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
+</div>
 </div>

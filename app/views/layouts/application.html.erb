@@ -5,6 +5,18 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <style>
+    body {
+       background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("/assets/mountains.jpg");
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+       background-size: cover;
+       background-position: center center;
+        
+    } 
+  </style>
+
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
