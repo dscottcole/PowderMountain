@@ -1,4 +1,4 @@
-<h1> Edit Your Lift Pass (Lift Pass is Required)</h1>
+<h1> Edit Your Lift Pass </h1>
 
 <% if flash[:error] %>
    <p style="color:red">  <%= flash[:error] %> </p>
@@ -18,3 +18,6 @@
 
     <%= submit_tag("Edit Pass") %>
 <% end %>
+
+<br>
+<%= button_to "Home", home_path, :method => "get" %>

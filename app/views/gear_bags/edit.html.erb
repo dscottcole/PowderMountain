@@ -1,4 +1,4 @@
-<h1> Reserve Your Gear (Renting Gear is Optional) </h1>
+<h1> Reserve Your Gear </h1>
 
 <% if flash[:error] %>
    <p style="color:red">  <%= flash[:error] %> </p>
@@ -27,3 +27,6 @@
 
 <%= f.submit "Edit Gear" %>
 <% end %>
+
+<br>
+<%= button_to "Home", home_path, :method => "get" %>

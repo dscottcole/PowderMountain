@@ -71,7 +71,6 @@ class LiftPassesController < ApplicationController
   end
 
   def destroy
-    byebug
     session[:lift_pass] = nil
     @lift_pass.destroy
     redirect_to home_path
