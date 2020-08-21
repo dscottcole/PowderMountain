@@ -24,7 +24,7 @@
 <% if current_user.admin? %>
 <h3> Admin Powers: </h3>
 <%= button_to "Edit This Lodging", edit_lodging_path, :class => "btn btn-outline-dark", :method => "get" %>
-<%= button_to "Destroy This Lodging", lodging_path, :class => "btn btn-outline-dark", :method => "delete" %>
+<%= button_to "Destroy This Lodging", lodging_path, :class => "btn btn-danger", :method => "delete" %>
 <% end %>
 
 </div>

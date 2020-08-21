@@ -25,7 +25,6 @@ class LodgingsController < ApplicationController
   end
 
   def update
-    byebug
     @lodging.attributes = {:lodging_name => lodging_params[:lodging_name], :price => lodging_params[:price], :description => lodging_params[:description]}
 
     if @lodging.valid?

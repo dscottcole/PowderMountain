@@ -20,6 +20,7 @@
     <%= f.password_field "login[password]" %> <br>
     <%= f.submit "Log In", {:class => "btn btn-outline-dark" } %>
 <% end %>
+<br>
 
 <p> No existing account? </p>
 <%= button_to "Create New Account", new_user_path, :class => "btn btn-outline-dark", :method => "get" %>

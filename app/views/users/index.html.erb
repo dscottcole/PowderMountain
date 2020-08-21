@@ -4,4 +4,8 @@
 <% @users.each do |u| %>
     <%= link_to u.name, user_path(u.id) %> <br>
 <% end %>
+
+
+<br>
+<%= button_to "Home", home_path, :class => "btn btn-dark", :method => "get" %>
 </div>
