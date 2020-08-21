@@ -1,8 +1,11 @@
 <div class='text-center'>
 
-<% if current_user.nil? %>
+<h1> Powder Mountain Park </h1>
+<br>
+<h5 > Home of the roost and shralp since 1991. </h5>
+<br>
 
-<h1> Powder Mountain </h1>
+<% if current_user.nil? %>
 
    <h3> Welcome, Guest! </h3>
    
@@ -44,9 +47,14 @@
 <h3> Admin Powers: </h3>
 <%= button_to "User Index", users_path, :method => "get" %>
 <%= button_to "Create Lodging", new_lodging_path, :method => "get" %>
+<br>
+<br>
+<br>
 
 <% end %>
 
 <% end %>
+
+<h5> Proud to serve shredders from all corners of the world. </h5>
 
 </div>

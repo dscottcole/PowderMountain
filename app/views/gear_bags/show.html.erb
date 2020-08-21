@@ -27,6 +27,8 @@
     <% end %>
 <% end %>
 
+
+
 <% if !@gear_bag.reservation.nil? %>
     <br>
     <% if @gear_bag.start_date >= Date.today %>
@@ -39,8 +41,15 @@
 <% end %>
 
 <% if @gear_bag.reservation.nil? %>
+<h4> Gear Breakdown: </h4>
+<% @gear_bag.gb_breakdown_helper.each do |k|%>
+    <%= "#{k[1].equipment_type}: #{k[1].eq_name}" %> <br>
+<% end %>
+<br>
+
 <p style="color:red"> This gear bag has not been secured. Finalize reservation to secure this gear bag! </p>
 <%= button_to "Return to Reservation", new_reservation_path, :method => "get" %>
+<br>
 <%= button_to "Delete Pending Gear Rental", gear_bag_path, :method => "delete" %>
 <% end %>
 

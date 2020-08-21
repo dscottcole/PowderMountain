@@ -22,7 +22,9 @@
 <% if !session[:gear_bag].nil? %>
     <p style="color:blue"> You have one pending gear rental. Finalize reservation to make it official! </p>
     <%= button_to "View Pending Gear Bag", gear_bag_path(session[:gear_bag]["id"]), :method => "get" %>
+    <br>
 <% end %>
+
 
 <h1> Finalize Your Reservation (Optional) </h1>
 

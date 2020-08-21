@@ -2,20 +2,17 @@
 <h1> Lodging Edit Page </h1>
 
 <% if flash[:error] %>
-    <% flash[:error].each do |k,v| %>
-   <p style="color:red"> <%= "#{k}: #{v}." %> </p>
-    <% end %>
+   <p style="color:red">  <%= flash[:error] %> </p>
+<% end %>
+
+<% if flash[:notice] %>
+    <p style="color:blue"> <%= flash[:notice] %> </p>
 <% end %>
 
 
 <%= form_for @lodging do |f| %>
-    <%= f.label :lodge_type, "Lodging Type:" %>
-    <%= f.collection_select :lodge_type, ["Camp", "Cabin"] , :to_s, :to_s, include_blank: false %> <br>
-    <br>
-    <br>
-    <%= f.label :number, "Lodging Number:" %>
-    <%= f.text_field :number %>
-    <br>
+    <%= f.label :lodging_name, "Lodging Type + Number:" %>
+    <%= f.text_field :lodging_name %> <br>
     <br>
     <%= f.label :price, "Price per night:" %>
     <%= f.text_field :price %>
@@ -24,9 +21,9 @@
     <%= f.label :description, "Description:" %>
     <%= f.text_area:description %>
     <br>
-    <br>
     <%= submit_tag("Edit Lodging") %>
   <% end %>
+
   <br>
   <%= button_to "Home", home_path, :method => "get" %>
   </div>
